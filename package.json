@@ -39,6 +39,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-cloudflare": "^4.7.1"
+    "@sveltejs/adapter-cloudflare": "^4.7.1",
+    "smooth-scrollbar": "^8.8.4"
   }
 }

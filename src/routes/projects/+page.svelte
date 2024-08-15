@@ -4,6 +4,8 @@
 	import AudioPlayer from '$lib/images/AudioPlayer.png';
 	import PongGame from '$lib/images/PongGame.png';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import Scrollbar  from 'smooth-scrollbar';
 	interface Project {
 		link?: string;
 		title: string;
@@ -35,9 +37,17 @@
 	};
 
 	let projects: any[] = [wordGuesser, audioPlayer, pongGame];
+	onMount(() => {
+		Scrollbar.init(document.querySelector('#scrollable')!, {
+			damping: 0.1,
+			thumbMinSize: 0,
+			renderByPixels: true,
+			alwaysShowTracks: false,
+		});
+	});
 </script>
 
-<div class="text-black" style="height: 92.7vh;">
+<div class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar " id="scrollable">
 	<Heading text="Projects" />
 	{#each projects as project}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->

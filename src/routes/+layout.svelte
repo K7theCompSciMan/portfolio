@@ -6,7 +6,7 @@
 
 <div class="max-h-screen justify-center text-center bg-slate-800">
 	<nav
-		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center"
+		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center overflow-auto shadow-md rounded-xl "
 	>
 		<div class="w-[41%] text-slate-500 flex-row flex pl-2">
 			<button class="w-fit h-fit hover:text-sky-500 transition-all duration-[50ms] hover:scale-105" on:click={() => window.open('https://github.com/K7theCompSciMan/', '_blank')}>
