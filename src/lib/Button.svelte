@@ -15,7 +15,7 @@
 			viewBox="0 0 24 24"
 			stroke-width="1.5"
 			stroke="currentColor"
-			class="size-6 mr-1"
+			class="size-4 mr-1 pt-1"
 		>
 			<path
 				stroke-linecap="round"
@@ -32,7 +32,7 @@
 			viewBox="0 0 24 24"
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
-			class="size-6 mr-1"
+			class="size-4 mr-1 pt-1"
 		>
 			<path
 				stroke-linecap="round"
@@ -49,7 +49,7 @@
 			viewBox="0 0 24 24"
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
-			class="size-6 mr-1"
+			class="size-4 mr-1 pt-1"
 		>
 			<path
 				stroke-linecap="round"
