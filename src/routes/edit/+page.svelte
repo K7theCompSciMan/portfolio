@@ -1,11 +1,9 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import AnimatedInputLabel from '$lib/AnimatedInputLabel.svelte';
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/Button.svelte';
 	import { onMount } from 'svelte';
-	import type { PageData } from '../$types';
 	import type { ActionData } from './$types';
     import type { Data } from '$lib';
 
@@ -175,4 +173,4 @@
 			</div>
 		</div>
 	{/if}
-</div>
+</div> -->
