@@ -9,6 +9,8 @@
 	import AudioPlayer from '$lib/images/AudioPlayer.png';
 	import PongGame from '$lib/images/PongGame.png';
 	import Saos from 'saos';
+	import AnimatedText from '$lib/AnimatedText.svelte';
+	import { goto } from '$app/navigation';
 	onMount(() => {
 		Scrollbar.init(document.querySelector('#scrollable')!, {
 			damping: 0.1,
@@ -57,19 +59,19 @@
 	<br />
 	<div
 		class="text-6xl flex flex-col mt-[10%] justify-center items-center border-b-[1px] border-slate-500 pb-[20%]"
-		in:fly={{ y: -100 }}
+		in:fly={{ y: -100, duration:1000 }}
 	>
 		<div class="flex flex-row text-2xl scale-150 pb-6">
 			<img {src} alt="Kesavan Rangarajan" class="rounded-full text-sm w-16 h-16" />
 			<h1
-				class="ml-4 text-center align-middle h-fit mt-1 rounded-3xl border-[1px] border-slate-500 p-2"
+				class="ml-4 text-center align-middle h-fit mt-1 rounded-3xl border-[1px] border-slate-500 p-2 transition-all"
 			>
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				Hi, I'm
-				<span class="cursor-pointer" id="wrapper">Kesavan!</span>
+				Hi👋, I'm <AnimatedText text="Kesavan" targeturl="/about-me"/>
+				
 			</h1>
 			<button
-				class="w-fit h-fit mt-4 ml-1"
+				class="w-fit h-fit mt-4 ml-1 hover:text-sky-500 transition-all duration-75"
 				data-tooltip-target="location-tooltip"
 				type="button"
 			>
@@ -111,10 +113,6 @@
 			{#each projects as project, i}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<Saos animation={'fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'}
-				animation_out={'slide-out-fwd-center 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'}
-				top={250}
-				bottom={250}>
 				<div class="flex h-96 {i != projects.length-1 ?  "border-b-[1px]" : ""} border-slate-500 py-4" in:fly={{x: i%2==0 ? -100:100}}>
 					{#if i % 2 == 0}
 						<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -151,7 +149,6 @@
 						/>
 					{/if}
 				</div>
-			</Saos>
 			{/each}
 		</div>
 	</div>

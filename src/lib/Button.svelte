@@ -5,7 +5,7 @@
 </script>
 
 <button
-	class="text-slate-400 flex flex-row hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] {more}"
+	class="text-slate-400 flex flex-row hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] text-center {more}"
 	on:click={onclick}
 >
 	{#if name === 'Home'}
@@ -58,7 +58,7 @@
 			></path>
 		</svg>
 	{/if}
-	<p>
+	<p class="w-fit ml-2">
 		{name}
 	</p>
 </button>

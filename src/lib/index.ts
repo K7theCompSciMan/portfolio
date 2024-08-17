@@ -1,1 +1,16 @@
-// place files you want to import through the `$lib` alias in this folder.
+export type Data = {
+    homePage?: {
+        headline?: {
+            imgURL?: string 
+            content?: string 
+            name?: string 
+            tagline?: string[] 
+        }
+    }
+    aboutPage?: {
+
+    }
+    projectsPage?: {
+
+    }
+}
