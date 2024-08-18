@@ -8,7 +8,6 @@
 	import WordGuesser from '$lib/images/WordGuesser.png';
 	import AudioPlayer from '$lib/images/AudioPlayer.png';
 	import PongGame from '$lib/images/PongGame.png';
-	import Saos from 'saos';
 	import AnimatedText from '$lib/AnimatedText.svelte';
 	import { goto } from '$app/navigation';
 	import { getData, type Data } from '$lib';

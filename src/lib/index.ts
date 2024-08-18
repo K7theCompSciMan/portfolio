@@ -8,6 +8,7 @@ export type Data = {
             location?: string
             tagline?: string[] 
         }
+        projects?: ProjectPreview[]
     }
     aboutPage?: {
 
@@ -15,6 +16,17 @@ export type Data = {
     projectsPage?: {
 
     }
+}
+
+export type ProjectPreview ={
+    name?: string
+    date?: string
+    category?: string
+    technologies?: Technology[]
+}
+export type Technology = {
+    name: string
+    url: string
 }
 export const getData = async(): Promise<Data> => JSON.parse(await fs.readFile('./data.json')).data;
 
