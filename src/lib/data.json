@@ -1,0 +1,15 @@
+{
+    "data": {
+        "homePage": {
+            "headline": {
+                "imgURL": "http://localhost:5173/src/lib/images/kesavan.jpeg",
+                "content": "Hi👋, I'm ",
+                "name": "Kesavan",
+                "location": "Marietta, Georgia, United States",
+                "tagline": ["Developer", "Engineer", "Leader"]
+            }
+        },
+        "aboutPage": {},
+        "projectsPage": {}
+    }
+}

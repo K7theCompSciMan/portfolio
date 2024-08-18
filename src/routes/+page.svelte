@@ -11,13 +11,22 @@
 	import Saos from 'saos';
 	import AnimatedText from '$lib/AnimatedText.svelte';
 	import { goto } from '$app/navigation';
-	onMount(() => {
+	import { getData, type Data } from '$lib';
+	let data: Data = {
+		homePage: {
+			headline: {
+				tagline: ['']
+			}
+		}
+	};
+	onMount(async() => {
 		Scrollbar.init(document.querySelector('#scrollable')!, {
 			damping: 0.1,
 			thumbMinSize: 0,
 			renderByPixels: true,
 			alwaysShowTracks: false
 		});
+		data = await getData();
 	});
 	interface Project {
 		link?: string;
@@ -51,9 +60,12 @@
 
 	let projects: any[] = [wordGuesser, audioPlayer, pongGame];
 </script>
-
+{#await getData()}
+<h1 class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar flex flex-col fixed bg-slate-800 w-screen"
+id="scrollable">Loading...</h1>
+{:then data}
 <div
-	class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar flex flex-col fixed"
+	class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar flex flex-col fixed bg-slate-800"
 	id="scrollable"
 >
 	<br />
@@ -61,49 +73,50 @@
 		class="text-6xl flex flex-col mt-[10%] justify-center items-center border-b-[1px] border-slate-500 pb-[20%]"
 		in:fly={{ y: -100, duration:1000 }}
 	>
+	{#if data.homePage?.headline}
 		<div class="flex flex-row text-2xl scale-150 pb-6">
-			<img {src} alt="Kesavan Rangarajan" class="rounded-full text-sm w-16 h-16" />
+			<img src={data.homePage.headline.imgURL} alt="Kesavan Rangarajan" class="rounded-full text-sm w-16 h-16" />
 			<h1
 				class="ml-4 text-center align-middle h-fit mt-1 rounded-3xl border-[1px] border-slate-500 p-2 transition-all"
 			>
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				Hi👋, I'm <AnimatedText text="Kesavan" targeturl="/about-me"/>
-				
-			</h1>
-			<button
+					{data.homePage.headline.content} <AnimatedText text={data.homePage.headline.name || ""} targeturl="/about-me"/>
+				</h1>
+				<button
 				class="w-fit h-fit mt-4 ml-1 hover:text-sky-500 transition-all duration-75"
 				data-tooltip-target="location-tooltip"
 				type="button"
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="size-6"
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-					/>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-					/>
-				</svg>
-			</button>
-			<Tooltip content="Marietta, Georgia, United States" id="location-tooltip"></Tooltip>
-		</div>
-		{#each ['DEVELOPER,', 'ENGINEER,', 'LEADER'] as text, i}
-			<span
+				<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke="currentColor"
+				class="size-6"
+				>
+				<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+				/>
+				<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+				/>
+			</svg>
+		</button>
+		<Tooltip content={data.homePage.headline.location || "Marietta, Georgia, United States"} id="location-tooltip"></Tooltip>
+	</div>
+			{#each data.homePage.headline.tagline || [] as text, i}
+				<span
 				class="font-bold {i == 0 ? 'text-sky-500' : ''} {i == 1
-					? 'text-rose-200'
-					: ''} {i == 2 ? 'text-violet-600' : ''} mb-3 cursor-pointer">{text}</span
-			>
-		{/each}
+								? 'text-rose-200'
+								: ''} {i == 2 ? 'text-violet-600' : ''} mb-3 cursor-pointer">{text}</span
+						>
+			{/each}
+			{/if}
 	</div>
 	<div class="ml-[8%] w-[84%] mt-[2%]">
 		<h1 class="w-full h-fit text-4xl text-violet-600 text-start border-b-2 border-slate-500 pb-4">
@@ -153,3 +166,4 @@
 		</div>
 	</div>
 </div>
+{/await}

@@ -1,11 +1,11 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import AnimatedInputLabel from '$lib/AnimatedInputLabel.svelte';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import Button from '$lib/Button.svelte';
 	import { onMount } from 'svelte';
 	import type { ActionData } from './$types';
-    import type { Data } from '$lib';
+    import { getData, setData, type Data } from '$lib';
 
 	export let actionData: ActionData;
 	let loggedIn = false;
@@ -29,10 +29,13 @@
 			}
 		}
 	};
-	onMount(() => {
+	onMount(async() => {
+		data = await getData();
 	});
 	$: console.log(data);
-    const saveData = () => {
+    const saveData = async() => {
+		console.log("unsaved", data);
+		await setData(data);
     }
 </script>
 
@@ -138,27 +141,43 @@
                             >
 							<h1 class="text-2xl">Headline</h1>
                             <div class="overflow-auto h-[12rem] w-3/4">
+								{#if data.homePage?.headline}
+								<div class="flex flex-row">
+								<img src={data.homePage.headline.imgURL} alt="Personal Image Preview" class="overflow-auto rounded-full text-sm w-16 h-16 mr-2" />
+								<AnimatedInputLabel
+									name="Image URL"
+									bind:value={data.homePage.headline.imgURL}
+									labelbg="bg-slate-800"
+									size="ml-2 relative -top-2"
+									height="w-36"
+								></AnimatedInputLabel>
+								</div>
+								{/if}
                             <div class="flex flex-row">
+							{#if data.homePage?.headline?.content}
 							<AnimatedInputLabel
 								name="Content"
-								value={data.homePage?.headline?.content}
+								bind:value={data.homePage.headline.content}
 								labelbg="bg-slate-800"
 								size="ml-2"
                                 height="w-36"
 							></AnimatedInputLabel>
+							{/if}
+							{#if data.homePage?.headline?.name}
 							<AnimatedInputLabel
 								name="Name"
-								value={data.homePage?.headline?.name}
+								bind:value={data.homePage.headline.name}
 								labelbg="bg-slate-800"
 								size="ml-2"
                                 height="w-24"
 							></AnimatedInputLabel>
+							{/if}
                         </div>
 							{#if data.homePage?.headline?.tagline}
 								{#each data.homePage.headline.tagline as text, i}
 									<AnimatedInputLabel
 										name="Tagline Word {i+1}"
-										value={text}
+										bind:value={text}
 										labelbg="bg-slate-800"
 										size="ml-2"
                                         height="w-36"
@@ -167,10 +186,10 @@
 							{/if}
 						</div>
                     </div>
-                    <Button name="Save" more="absolute bottom-[4%] w-[4%] left-[48%] border-slate-500 border-[1px] rounded-3xl " onclick={()=>{saveData()}}></Button>
+                    <Button name="Save" more="absolute bottom-[4%] w-[4%] left-[48%] border-slate-500 border-[1px] rounded-3xl " onclick={async()=>{await saveData()}}></Button>
 					{:else if selectedPage === 'projects'}{:else if selectedPage === 'about-me'}{/if}
 				</div>
 			</div>
 		</div>
 	{/if}
-</div> -->
+</div>

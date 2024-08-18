@@ -3,7 +3,7 @@ import fs from 'vite-plugin-fs';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), fs()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
