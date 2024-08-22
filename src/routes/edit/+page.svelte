@@ -235,13 +235,13 @@
 												height="w-24"
 												width="w-36"
 											></AnimatedInputLabel>
+											<div
+											class="absolute border-slate-500 border-[1px] w-fit pr-[10%] rounded-2xl h-[30%] right-[2%] bottom-[5%] flex flex-row"
+											>
 											<label
 												for=""
-												class="absolute left-[40%] text-md bottom-[35%]"
+												class="absolute left-[40%] text-md bottom-[100%]"
 												>Technologies</label
-											>
-											<div
-												class="absolute border-slate-500 border-[1px] w-[60%] rounded-2xl h-[30%] right-[2%] bottom-[5%] flex flex-row overflow-auto"
 											>
 												{#each project.technologies || [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] as tech}
 													<div
