@@ -30,9 +30,9 @@
 		<div
 			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[70%] flex-row flex align-middle justify-center items-center text-sm"
 		>
-			<Button name="Home" onclick={() => goto('/')} more="mr-4"></Button>
-			<Button name="My Projects" onclick={() => goto('/projects')} more="mr-4"></Button>
-			<Button name="About Me" onclick={() => goto('/about-me')}></Button>
+			<Button name="Home" onclick={() => goto('/')} more="mr-4 overflow-clip"></Button>
+			<Button name="My Projects" onclick={() => goto('/projects')} more="mr-4 overflow-clip"></Button>
+			<Button name="About Me" onclick={() => goto('/about-me')} more="overflow-clip"></Button>
 		</div>
 		<div class="w-[41%]"></div>
 	</nav>

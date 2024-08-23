@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ProjectPreview, Technology } from '$lib/index.ts';
 	import AnimatedInputLabel from '$lib/AnimatedInputLabel.svelte';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
@@ -6,6 +7,7 @@
 	import { onMount } from 'svelte';
 	import type { ActionData } from './$types';
 	import { getData, setData, type Data } from '$lib';
+	import Tooltip from '$lib/Tooltip.svelte';
 
 	export let actionData: ActionData;
 	let loggedIn = false;
@@ -22,6 +24,15 @@
 	}
 
 	let selectedPage = 'home';
+	let templateProject: ProjectPreview = {
+		name: 'Project Name',
+		date: '2024',
+		category: 'project',
+		technologies: [
+			{ name: 'tech', url: '' },
+			{ name: 'somethingnew', url: '' }
+		]
+	};
 	let data: Data = {
 		homePage: {
 			headline: {
@@ -32,7 +43,10 @@
 					name: 'test',
 					date: '2024',
 					category: 'project',
-					technologies: [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }]
+					technologies: [
+						{ name: 'tech', url: '' },
+						{ name: 'somethingnew', url: '' }
+					]
 				}
 			]
 		}
@@ -45,6 +59,21 @@
 		console.log('unsaved', data);
 		await setData(data);
 	};
+
+	let newTechPopup = false;
+	let technologies: Technology[] = [
+		{
+			name: 'Svelte',
+			url: 'https://svelte.dev',
+			logo: 'https://svelte.dev/svelte-logo.svg'
+		},
+		{
+			name: 'TS',
+			url: 'https://www.typescriptlang.org/',
+			logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png'
+		}
+	];
+	let selectedProject: ProjectPreview;
 </script>
 
 <div
@@ -143,7 +172,7 @@
 				</div>
 				<div>
 					{#if selectedPage === 'home'}
-						{#if data.homePage && data.homePage.headline}
+						{#if data.homePage && data.homePage.headline && data.homePage.projects}
 							<div
 								id="headline"
 								class="w-1/3 h-[16rem] rounded-2xl border-slate-500 border-[1px] ml-4 mt-2"
@@ -199,29 +228,25 @@
 								</div>
 							</div>
 							<div
-								class="w-1/2 h-1/2 top-[7.8%] left-[38%] border-slate-500 border-[1px] rounded-2xl absolute"
+								class="w-1/2 h-1/2 top-[7.8%] left-[38%] border-slate-500 border-[1px] rounded-2xl absolute flex flex-col overflow-auto"
 								id="projects"
 							>
 								<h1 class="text-2xl text-center">Projects Preview</h1>
-								<div>
+								<div class="flex flex-col w-full h-fit">
 									{#each data.homePage.projects || [{ name: 'test', date: '2024', category: 'project', technologies: [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] }] as project}
 										<div
-											class="w-[90%] left-[5%] h-1/3 border-slate-500 border-[1px] absolute rounded-2xl mt-[2%] overflow-auto"
+											class="w-[90%] left-[5%] h-full border-slate-500 border-[1px] relative rounded-2xl mt-[2%]"
 										>
-											<AnimatedInputLabel
-												name="Name"
+											<input
+												type="text"
 												bind:value={project.name}
-												labelbg="bg-slate-800"
-												size="ml-2"
-												mt="mt-[3%]"
-												height="w-24"
-												width="w-36"
-											></AnimatedInputLabel>
+												class="relative right-[28%] text-xl bg-transparent focus:outline-none pl-2 focus:border-sky-500 transitiona-all duration-200 border-0 border-b"
+											/>
 											<AnimatedInputLabel
 												name="Year"
 												bind:value={project.date}
 												labelbg="bg-slate-800"
-												size="ml-2"
+												size="ml-2 -bottom-[15%]"
 												mt="mt-[3%]"
 												height="w-24"
 												width="w-36"
@@ -230,67 +255,177 @@
 												name="Category"
 												bind:value={project.category}
 												labelbg="bg-slate-800"
-												size="ml-2 left-[72%] -top-[94%]"
+												size="ml-2 left-[68%] -top-[65%]"
 												mt="mt-[3%]"
 												height="w-24"
 												width="w-36"
 											></AnimatedInputLabel>
-											<div
-											class="absolute border-slate-500 border-[1px] w-fit pr-[10%] rounded-2xl h-[30%] right-[2%] bottom-[5%] flex flex-row"
-											>
-											<label
-												for=""
-												class="absolute left-[40%] text-md bottom-[100%]"
-												>Technologies</label
-											>
-												{#each project.technologies || [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] as tech}
-													<div
-														class="border-slate-500 border-[1px] rounded-xl w-fit h-fit px-2 ml-2 mt-1 cursor-pointer"
+											{#if project.technologies != undefined}
+												<div
+													class="absolute border-slate-500 border-[1px] w-fit pr-[10%] pb-2 pt-1 h-fit rounded-2xl right-[2%] bottom-[20%] flex flex-row"
+												>
+													<label
+														for=""
+														class="absolute left-[40%] text-md bottom-[100%]"
+														>Technologies</label
 													>
-														{tech.name}
-														<button class="w-fit h-fit mt-1 relative top-[3px] hover:text-red-500" on:click={() => {project.technologies = project.technologies?.filter((t) => t !== tech)}}>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																fill="none"
-																viewBox="0 0 24 24"
-																stroke-width="1.5"
-																stroke="currentColor"
-																class="size-4"
-															>
-																<path
-																	stroke-linecap="round"
-																	stroke-linejoin="round"
-																	d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+													{#each project.technologies || [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] as tech}
+														<div
+															class="border-slate-500 border-[1px] rounded-xl w-fit h-fit px-2 ml-2 mt-1 cursor-pointer flex flex-row"
+														>
+															{#if tech.url}
+																<img
+																	src={tech.logo}
+																	alt={tech.name}
+																	class="size-4 mr-2 mt-1"
 																/>
-															</svg>
-														</button>
-													</div>
-												{/each}
-												<button class="ml-2 rotate-90 hover:text-sky-500">
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														class="size-6"
+																{tech.name}
+															{:else}
+																{tech.name}
+															{/if}
+															<button
+																class="w-fit h-fit mt-[0.125rem] relative top-[3px] hover:text-red-500 ml-1"
+																on:click={() => {
+																	project.technologies =
+																		project.technologies?.filter(
+																			(t) => t !== tech
+																		);
+																}}
+															>
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	fill="none"
+																	viewBox="0 0 24 24"
+																	stroke-width="1.5"
+																	stroke="currentColor"
+																	class="size-4"
+																>
+																	<path
+																		stroke-linecap="round"
+																		stroke-linejoin="round"
+																		d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+																	/>
+																</svg>
+															</button>
+														</div>
+													{/each}
+													<button
+														class="ml-2 rotate-90 hover:text-sky-500 {newTechPopup &&
+														selectedProject === project
+															? 'hidden'
+															: ''} relative w-fit h-fit mt-1"
+														on:click={() => {
+															newTechPopup = true;
+															selectedProject = project;
+															setTimeout(
+																() =>
+																	document
+																		.getElementById('techPopup')
+																		?.focus(),
+																200
+															);
+														}}
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
-														/>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M6 6h.008v.008H6V6Z"
-														/>
-													</svg>
-												</button>
-											</div>
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															fill="none"
+															viewBox="0 0 24 24"
+															stroke-width="1.5"
+															stroke="currentColor"
+															class="size-6"
+														>
+															<path
+																stroke-linecap="round"
+																stroke-linejoin="round"
+																d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+															/>
+															<path
+																stroke-linecap="round"
+																stroke-linejoin="round"
+																d="M6 6h.008v.008H6V6Z"
+															/>
+														</svg>
+													</button>
+													<div
+														class="border-slate-500 border-[1px] rounded-xl min-w-16 w-fit h-7 px-2 ml-2 mt-1 focus:border-sky-500 {newTechPopup &&
+														selectedProject === project
+															? ''
+															: 'hidden'} overflow-y-auto"
+														on:focusout={() => (newTechPopup = false)}
+														id="techPopup"
+													>
+														{#each technologies.filter((t) => !project.technologies?.find((tech) => tech.name === t.name)) as tech}
+															<div>
+																<button
+																	on:click={() => {
+																		if (
+																			project.technologies &&
+																			!project.technologies.find(
+																				(t) =>
+																					t.name ===
+																					tech.name
+																			)
+																		) {
+																			project.technologies = [
+																				...project.technologies,
+																				tech
+																			];
+																		}
+																		newTechPopup = false;
+																	}}
+																	class="flex flex-row justify-center items-center mt-[0.125rem]"
+																>
+																	{#if tech.logo}
+																		<img
+																			src={tech.logo}
+																			alt={tech.name}
+																			class="size-4 mr-2"
+																		/>
+																		{tech.name}
+																	{:else}
+																		{tech.name}
+																	{/if}
+																</button>
+															</div>
+														{/each}
+													</div>
+												</div>
+											{/if}
+											<button class="absolute top-2 right-2 hover:text-red-500" on:click={() => {if(data.homePage?.projects) data.homePage.projects = data.homePage.projects.filter((p) => p !== project)}}>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="size-6"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+													/>
+												</svg>
+											</button>
 										</div>
 									{/each}
 								</div>
+								<Tooltip content="Add new project" tooltip_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group relative right-[44%] bottom-[60%]" button_content={`<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12 4.5v15m7.5-7.5h-15"
+										/>
+									</svg>`} arrow={false} button_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group absolute left-0">
+
+								</Tooltip>
 							</div>
 						{/if}
 						<Button

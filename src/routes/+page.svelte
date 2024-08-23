@@ -19,13 +19,13 @@
 		}
 	};
 	onMount(async () => {
+		data = await getData();
 		Scrollbar.init(document.querySelector('#scrollable')!, {
 			damping: 0.1,
 			thumbMinSize: 0,
 			renderByPixels: true,
 			alwaysShowTracks: false
 		});
-		data = await getData();
 	});
 	interface Project {
 		link?: string;
@@ -92,8 +92,8 @@
 							targeturl="/about-me"
 						/>
 					</h1>
-					<button
-						class="w-fit h-fit mt-4 ml-1 hover:text-sky-500 transition-all duration-75"
+					<!-- <button
+						class="w-fit h-fit mt-4 ml-1 hover:text-sky-500 transition-all duration-75 peer"
 						data-tooltip-target="location-tooltip"
 						type="button"
 					>
@@ -116,7 +116,7 @@
 								d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
 							/>
 						</svg>
-					</button>
+					</button> -->
 					<Tooltip
 						content={data.homePage.headline.location ||
 							'Marietta, Georgia, United States'}
@@ -143,7 +143,7 @@
 				<div id="projects" class="">
 					{#each data.homePage.projects || [{ name: 'Word Guesser', date: '2022', category: 'Web Dev', technologies: [{ name: 'Svelte', url: 'https://svelte.dev/' }] }] as project, i}
 						<div
-							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 {i + 1 <
+							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-default  {i + 1 <
 							data.homePage.projects.length
 								? 'mb-[2%]'
 								: 'mb-[10%]'}"
