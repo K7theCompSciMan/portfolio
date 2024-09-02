@@ -71,6 +71,11 @@
 			name: 'TS',
 			url: 'https://www.typescriptlang.org/',
 			logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png'
+		},
+		{
+			name: "Java",
+			url: "https://www.java.com/en/",
+			logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Java_Logo.svg/1200px-Java_Logo.svg.png"
 		}
 	];
 	let selectedProject: ProjectPreview;
@@ -233,7 +238,7 @@
 							>
 								<h1 class="text-2xl text-center">Projects Preview</h1>
 								<div class="flex flex-col w-full h-fit">
-									{#each data.homePage.projects || [{ name: 'test', date: '2024', category: 'project', technologies: [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] }] as project}
+									{#each data.homePage.projects || templateProject as project}
 										<div
 											class="w-[90%] left-[5%] h-full border-slate-500 border-[1px] relative rounded-2xl mt-[2%]"
 										>
@@ -266,7 +271,7 @@
 												>
 													<label
 														for=""
-														class="absolute left-[40%] text-md bottom-[100%]"
+														class="absolute left-[8%] text-md bottom-[100%]"
 														>Technologies</label
 													>
 													{#each project.technologies || [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] as tech}
@@ -410,22 +415,24 @@
 										</div>
 									{/each}
 								</div>
-								<Tooltip content="Add new project" tooltip_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group relative right-[44%] bottom-[60%]" button_content={`<svg
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											d="M12 4.5v15m7.5-7.5h-15"
-										/>
-									</svg>`} arrow={false} button_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group absolute left-0">
-
-								</Tooltip>
+								<button on:click={() => {data.homePage?.projects?.push(templateProject); console.log('added project')}}>
+									<Tooltip content="Add new project" tooltip_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group relative right-[44%] bottom-[60%]" button_content={`<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+											on:click={() => {projects.push(templateProject)}}
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M12 4.5v15m7.5-7.5h-15"
+											/>
+										</svg>`} arrow={false} button_placement="w-fit h-fit px-2 ml-[4.5%] mt-[2%] transition-all duration-200 group absolute left-0">
+									</Tooltip>
+								</button>
 							</div>
 						{/if}
 						<Button

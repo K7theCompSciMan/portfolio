@@ -6,6 +6,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Scrollbar  from 'smooth-scrollbar';
+	import Button from '$lib/Button.svelte';
 	interface Project {
 		link?: string;
 		title: string;
@@ -48,7 +49,6 @@
 </script>
 
 <div class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar " id="scrollable">
-	<Heading text="Projects" />
 	{#each projects as project}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->

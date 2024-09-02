@@ -143,7 +143,8 @@
 				<div id="projects" class="">
 					{#each data.homePage.projects || [{ name: 'Word Guesser', date: '2022', category: 'Web Dev', technologies: [{ name: 'Svelte', url: 'https://svelte.dev/' }] }] as project, i}
 						<div
-							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-default  {i + 1 <
+							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-default {i +
+								1 <
 							data.homePage.projects.length
 								? 'mb-[2%]'
 								: 'mb-[10%]'}"
@@ -152,7 +153,11 @@
 							<div
 								class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"
 							>
-								<div class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500">{project.name}</div>
+								<div
+									class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500"
+								>
+									{project.name}
+								</div>
 								<div class="text-md pl-[4%] font-thin">{project.date}</div>
 							</div>
 							<div
@@ -165,8 +170,14 @@
 									{#each project.technologies || [] as tech}
 										<!-- svelte-ignore a11y-click-events-have-key-events -->
 										<div
-											class="border-slate-500 text-left border-[1px] rounded-xl w-fit max-w-full overflow-clip h-fit px-2 ml-2 mt-1 cursor-pointer" on:click={() => window.open(tech.url, '_blank')}
+											class="border-slate-500 text-left border-[1px] rounded-xl h-6 w-fit max-w-full overflow-clip px-2 pb-4 ml-2 mt-1 cursor-pointer flex flex-row"
+											on:click={() => window.open(tech.url, '_blank')}
 										>
+											<img
+												src={tech.logo}
+												alt={tech.name}
+												class="size-4 mr-2 mt-1 "
+											/>
 											{tech.name}
 										</div>
 									{/each}
