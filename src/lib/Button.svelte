@@ -2,10 +2,11 @@
 	export let name = 'Home';
 	export let onclick = () => {};
 	export let more = "";
+	export let textColor = "text-slate-400";
 </script>
 
 <button
-	class="text-slate-400 flex flex-row hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] text-center {more}"
+	class="{textColor} flex flex-row hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] text-center {more}"
 	on:click={onclick}
 >
 	{#if name === 'Home'}

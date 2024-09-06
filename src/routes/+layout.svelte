@@ -7,7 +7,6 @@
 	onMount(() => {
 		selectedPage = window.location.pathname.split('/')[1];
 	})
-	$: console.log(selectedPage)
 </script>
 
 <div class="max-h-screen justify-center text-center bg-slate-800 relative">
@@ -36,9 +35,9 @@
 		<div
 			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[70%] flex-row flex align-middle justify-center items-center text-sm"
 		>
-			<Button name="Home" onclick={() => goto('/')} more="mr-4 overflow-clip"></Button>
-			<Button name="My Projects" onclick={() => goto('/projects')} more="mr-4 overflow-clip"></Button>
-			<Button name="About Me" onclick={() => goto('/about-me')} more="overflow-clip"></Button>
+			<Button name="Home" onclick={() => {window.location.pathname="/"; selectedPage=""}} more=" {selectedPage === "" ? " scale-[1.05] " : ""} mr-4 overflow-clip" textColor={selectedPage === "" ? "text-sky-500" : 'text-slate-400'}></Button>
+			<Button name="My Projects" onclick={() => {window.location.pathname='/projects'; selectedPage="projects"}} more=" {selectedPage === "projects" ? "scale-[1.05]" : ""} mr-4 overflow-clip" textColor={selectedPage === "projects" ? "text-sky-500" : 'text-slate-400'}></Button>
+			<Button name="About Me" onclick={() => {window.location.pathname='/about-me'; selectedPage="about-me"}} more=" {selectedPage === "about-me" ? "scale-[1.05]" : ""} overflow-clip" textColor={selectedPage === "about-me" ? "text-sky-500" : 'text-slate-400'}></Button>
 		</div>
 		<div class="w-[41%]"></div>
 	</nav>

@@ -11,9 +11,21 @@ export type Data = {
 		projects?: ProjectPreview[];
 	};
 	aboutPage?: {};
-	projectsPage?: {};
+	projectsPage?: {
+		engineeringProjects?: Project[];
+		programmingProjects?: Project[];
+	};
 };
 
+export type Project = {
+	name?: string;
+	date?: string;
+	category?: string;
+	technologies?: Technology[];
+	description?: string;
+	image?: string;
+	url?: string;
+}
 export type ProjectPreview = {
 	name?: string;
 	date?: string;
