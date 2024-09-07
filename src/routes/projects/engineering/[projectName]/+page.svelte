@@ -56,10 +56,10 @@
                     {:else}
                     <p class="relative text-left text-xl pl-[12.5%]">{subsubHeading.content}</p>
                     {/if}
-                    {#each subsubHeading.images || [] as image}
-                        <Image {image}></Image>
-                        {/each}
-                    </div>
+                </div>
+                {#each subsubHeading.images || [] as image}
+                    <Image {image}></Image>
+                    {/each}
                     
                     {/each}
                 </div>
