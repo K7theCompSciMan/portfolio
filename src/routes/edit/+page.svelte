@@ -1083,8 +1083,15 @@
 															height="w-12"
 														></AnimatedInputLabel>
 														<AnimatedInputLabel
-															name="CSS (Tailwind style)"
+															name="css (style)"
 															bind:value={image.css}
+															labelbg="bg-slate-800"
+															size="ml-2 relative -top-2"
+															height="w-12"
+														></AnimatedInputLabel>
+														<AnimatedInputLabel
+															name="Class (Tailwind style)"
+															bind:value={image.class}
 															labelbg="bg-slate-800"
 															size="ml-2 relative -top-2"
 															height="w-12"
@@ -1326,8 +1333,15 @@
 														height="w-12"
 													></AnimatedInputLabel>
 													<AnimatedInputLabel
-														name="CSS (Tailwind style)"
+														name="Css (style)"
 														bind:value={image.css}
+														labelbg="bg-slate-800"
+														size="ml-2 relative -top-2"
+														height="w-12"
+													></AnimatedInputLabel>
+													<AnimatedInputLabel
+														name="Class (Tailwind style)"
+														bind:value={image.class}
 														labelbg="bg-slate-800"
 														size="ml-2 relative -top-2"
 														height="w-12"

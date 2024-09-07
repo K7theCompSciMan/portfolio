@@ -44,27 +44,27 @@
 				{:else}
 					<p class="relative text-left text-xl pl-[12.5%]">{subHeading.content}</p>
 				{/if}
-				{#each subHeading.images || [] as image}
-					<Image {image}></Image>
-				{/each}
                 {#each subHeading.subheadings || [] as subsubHeading}
                 <div class="relative left-[12.5%] w-[75%] mt-[2%] mb-[2%]">
                     <h1
-                        class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
+                    class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
                     >
                         {subsubHeading.title || ''}
                     </h1>
                     {#if subsubHeading.html}
-                        {@html subsubHeading.content}
+                    {@html subsubHeading.content}
                     {:else}
-                        <p class="relative text-left text-xl pl-[12.5%]">{subsubHeading.content}</p>
+                    <p class="relative text-left text-xl pl-[12.5%]">{subsubHeading.content}</p>
                     {/if}
                     {#each subsubHeading.images || [] as image}
                         <Image {image}></Image>
+                        {/each}
+                    </div>
+                    
                     {/each}
                 </div>
+                <div class="absolute right-0">
+                </div>
                 {/each}
-			</div>
-		{/each}
 	{/if}
 </div>

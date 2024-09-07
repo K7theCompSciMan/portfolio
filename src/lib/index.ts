@@ -21,6 +21,7 @@ export type Image = {
 	alt?: string;
 	onclick?: () => void;
 	caption?: string;
+	class?: string;
 	css?: string;
 };
 
