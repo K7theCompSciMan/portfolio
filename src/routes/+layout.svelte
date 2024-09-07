@@ -3,18 +3,22 @@
 	import Button from '$lib/Button.svelte';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	let selectedPage = '';
 	onMount(() => {
 		selectedPage = window.location.pathname.split('/')[1];
-	})
+	});
 </script>
 
 <div class="max-h-screen justify-center text-center bg-slate-800 relative">
 	<nav
-		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center overflow-auto shadow-md rounded-xl relative "
+		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center overflow-auto shadow-md rounded-xl relative"
 	>
 		<div class="w-[41%] text-slate-500 flex-row flex pl-2">
-			<button class="w-fit h-fit hover:text-sky-500 transition-all duration-[50ms] hover:scale-105" on:click={() => window.open('https://github.com/K7theCompSciMan/', '_blank')}>
+			<button
+				class="w-fit h-fit hover:text-sky-500 transition-all duration-[50ms] hover:scale-105"
+				on:click={() => window.open('https://github.com/K7theCompSciMan/', '_blank')}
+			>
 				<svg
 					class="pb-0.5"
 					xmlns="http://www.w3.org/2000/svg"
@@ -35,10 +39,53 @@
 		<div
 			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[70%] flex-row flex align-middle justify-center items-center text-sm"
 		>
-			<Button name="Home" onclick={() => {window.location.pathname="/"; selectedPage=""}} more=" {selectedPage === "" ? " scale-[1.05] " : ""} mr-4 overflow-clip" textColor={selectedPage === "" ? "text-sky-500" : 'text-slate-400'}></Button>
-			<Button name="My Projects" onclick={() => {window.location.pathname='/projects'; selectedPage="projects"}} more=" {selectedPage === "projects" ? "scale-[1.05]" : ""} mr-4 overflow-clip" textColor={selectedPage === "projects" ? "text-sky-500" : 'text-slate-400'}></Button>
-			<Button name="About Me" onclick={() => {window.location.pathname='/about-me'; selectedPage="about-me"}} more=" {selectedPage === "about-me" ? "scale-[1.05]" : ""} overflow-clip" textColor={selectedPage === "about-me" ? "text-sky-500" : 'text-slate-400'}></Button>
+			<Button
+				name="Home"
+				onclick={() => {
+					window.location.pathname = '/';
+					selectedPage = '';
+				}}
+				more=" {selectedPage === '' ? ' scale-[1.05] ' : ''} mr-4 overflow-clip"
+				textColor={selectedPage === '' ? 'text-sky-500' : 'text-slate-400'}
+			></Button>
+			<Button
+				name="My Projects"
+				onclick={() => {
+					window.location.pathname = '/projects';
+					selectedPage = 'projects';
+				}}
+				more=" {selectedPage === 'projects' ? 'scale-[1.05]' : ''} mr-4 overflow-clip"
+				textColor={selectedPage === 'projects' ? 'text-sky-500' : 'text-slate-400'}
+			></Button>
+			<Button
+				name="About Me"
+				onclick={() => {
+					window.location.pathname = '/about-me';
+					selectedPage = 'about-me';
+				}}
+				more=" {selectedPage === 'about-me' ? 'scale-[1.05]' : ''} overflow-clip"
+				textColor={selectedPage === 'about-me' ? 'text-sky-500' : 'text-slate-400'}
+			></Button>
 		</div>
+		{#if $page.data.loggedIn}
+			<button class="text-slate-400 hover:text-sky-500 ml-2 mb-1 flex flex-row hover:scale-105 transition-all duration-200" on:click={() => window.location.pathname="/edit"}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="size-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+					/>
+				</svg>
+				Edit
+			</button>
+		{/if}
 		<div class="w-[41%]"></div>
 	</nav>
 	<slot />
