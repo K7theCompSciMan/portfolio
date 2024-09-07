@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Project, ProjectPreview, Technology } from '$lib/index.ts';
+	import type { Description, Project, ProjectPreview, SubHeading, Technology } from '$lib/index';
 	import AnimatedInputLabel from '$lib/AnimatedInputLabel.svelte';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
@@ -8,6 +8,7 @@
 	import type { ActionData } from './$types';
 	import { getData, setData, type Data } from '$lib';
 	import Tooltip from '$lib/Tooltip.svelte';
+	import Image from '$lib/Image.svelte';
 
 	export let actionData: ActionData;
 	let loggedIn = false;
@@ -85,9 +86,23 @@
 			name: 'Java',
 			url: 'https://www.java.com/en/',
 			logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Java_Logo.svg/1200px-Java_Logo.svg.png'
+		},
+		{
+			name: 'VEX Robotics',
+			url: 'https://www.vexrobotics.com/',
+			logo: 'https://kb.vex.com/hc/article_attachments/29769144398996'
+		},
+		{
+			name: 'RobotC',
+			url: 'https://www.robotc.net',
+			logo: 'data:image/png;base64,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'
 		}
 	];
-	let selectedProject: ProjectPreview;
+	let selectedProjectPreview: ProjectPreview;
+	let descriptionPopup = false;
+	let selectedProject: Project;
+	let subsubheadingsPopup = false;
+	let selectedSubHeading: SubHeading;
 </script>
 
 <div
@@ -325,12 +340,12 @@
 													{/each}
 													<button
 														class="ml-2 rotate-90 hover:text-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? 'hidden'
 															: ''} relative w-fit h-fit mt-1"
 														on:click={() => {
 															newTechPopup = true;
-															selectedProject = project;
+															selectedProjectPreview = project;
 															setTimeout(
 																() =>
 																	document
@@ -362,7 +377,7 @@
 													</button>
 													<div
 														class="border-slate-500 border-[1px] rounded-xl min-w-16 w-fit h-7 px-2 ml-2 mt-1 focus:border-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? ''
 															: 'hidden'} overflow-y-auto"
 														on:focusout={() => (newTechPopup = false)}
@@ -479,6 +494,8 @@
 								<h1 class="text-2xl text-center">Engineering Projects</h1>
 								<div class="flex flex-col w-full h-fit">
 									{#each data.projectsPage.engineeringProjects || [] as project}
+										<!-- svelte-ignore a11y-click-events-have-key-events -->
+										<!-- svelte-ignore a11y-no-static-element-interactions -->
 										<div
 											class="w-[90%] left-[5%] h-full border-slate-500 border-[1px] relative rounded-2xl mt-[2%]"
 										>
@@ -487,15 +504,43 @@
 												bind:value={project.name}
 												class="relative right-[28%] w-48 text-xl bg-transparent focus:outline-none pl-2 focus:border-sky-500 transitiona-all duration-200 border-0 border-b"
 											/>
-											<label for="" class="absolute left-[37%] top-[36%]">
+											<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+											<label
+												for=""
+												class="absolute left-[40%] top-[56%] peer cursor-pointer"
+												on:click={() => {
+													if (!project.description)
+														project.description = {
+															subheadings: [
+																{
+																	title: 'Sub Heading',
+																	content: 'this is a subheading'
+																}
+															]
+														};
+													selectedProject = project;
+													descriptionPopup = true;
+												}}
+											>
 												Description
 											</label>
-											<textarea
-												name=""
-												id=""
-												class="absolute bg-transparent text-slate-400 left-[35%] rounded-2xl top-[50%] h-[30%] w-[25%] resize-none"
-												bind:value={project.description}
-											></textarea>
+											<!-- svelte-ignore a11y-click-events-have-key-events -->
+											<div
+												class="absolute bg-transparent text-slate-400 left-[35%] rounded-2xl top-[50%] h-[30%] w-[25%] resize-none border-slate-500 border cursor-pointer"
+												on:click={() => {
+													if (!project.description)
+														project.description = {
+															subheadings: [
+																{
+																	title: 'Sub Heading',
+																	content: 'this is a subheading'
+																}
+															]
+														};
+													selectedProject = project;
+													descriptionPopup = true;
+												}}
+											></div>
 											<AnimatedInputLabel
 												name="Year"
 												bind:value={project.date}
@@ -515,11 +560,11 @@
 												width="w-1/4"
 											></AnimatedInputLabel>
 											{#if project.technologies != undefined}
-											<label
-												for=""
-												class="absolute right-[16%] text-md top-[38%]"
-												>Technologies</label
-											>
+												<label
+													for=""
+													class="absolute right-[16%] text-md top-[38%]"
+													>Technologies</label
+												>
 												<div
 													class="absolute border-slate-500 border-[1px] pr-[10%] pb-2 pt-1 w-[36%] h-[30%] overflow-y-visible overflow-x-scroll rounded-2xl right-[2%] bottom-[20%] flex flex-row"
 												>
@@ -565,12 +610,12 @@
 													{/each}
 													<button
 														class="ml-2 rotate-90 hover:text-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? 'hidden'
 															: ''} relative w-fit h-fit mt-1"
 														on:click={() => {
 															newTechPopup = true;
-															selectedProject = project;
+															selectedProjectPreview = project;
 															setTimeout(
 																() =>
 																	document
@@ -602,7 +647,7 @@
 													</button>
 													<div
 														class="border-slate-500 border-[1px] rounded-xl min-w-16 w-fit h-7 px-2 ml-2 mt-1 focus:border-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? ''
 															: 'hidden'} overflow-y-auto"
 														on:focusout={() => (newTechPopup = false)}
@@ -675,7 +720,11 @@
 								</div>
 								<button
 									on:click={() => {
-										if (data.projectsPage) data.projectsPage.engineeringProjects = [...(data.projectsPage.engineeringProjects || []), templateProject];
+										if (data.projectsPage)
+											data.projectsPage.engineeringProjects = [
+												...(data.projectsPage.engineeringProjects || []),
+												templateProject
+											];
 										console.log('added project');
 									}}
 								>
@@ -704,11 +753,11 @@
 							</div>
 							<div
 								class="w-[46%] h-[75%] top-[7.8%] right-[2%] border-slate-500 border-[1px] rounded-2xl absolute flex flex-col overflow-auto"
-								id="Engineering Projects"
+								id="Programming Projects"
 							>
 								<h1 class="text-2xl text-center">Programming Projects</h1>
 								<div class="flex flex-col w-full h-fit">
-									{#each data.projectsPage.engineeringProjects || [] as project}
+									{#each data.projectsPage.programmingProjects || [] as project}
 										<div
 											class="w-[90%] left-[5%] h-full border-slate-500 border-[1px] relative rounded-2xl mt-[2%]"
 										>
@@ -745,11 +794,11 @@
 												width="w-1/4"
 											></AnimatedInputLabel>
 											{#if project.technologies != undefined}
-											<label
-												for=""
-												class="absolute right-[16%] text-md top-[38%]"
-												>Technologies</label
-											>
+												<label
+													for=""
+													class="absolute right-[16%] text-md top-[38%]"
+													>Technologies</label
+												>
 												<div
 													class="absolute border-slate-500 border-[1px] pr-[10%] pb-2 pt-1 w-[36%] h-[30%] overflow-y-visible overflow-x-scroll rounded-2xl right-[2%] bottom-[20%] flex flex-row"
 												>
@@ -795,12 +844,12 @@
 													{/each}
 													<button
 														class="ml-2 rotate-90 hover:text-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? 'hidden'
 															: ''} relative w-fit h-fit mt-1"
 														on:click={() => {
 															newTechPopup = true;
-															selectedProject = project;
+															selectedProjectPreview = project;
 															setTimeout(
 																() =>
 																	document
@@ -832,7 +881,7 @@
 													</button>
 													<div
 														class="border-slate-500 border-[1px] rounded-xl min-w-16 w-fit h-7 px-2 ml-2 mt-1 focus:border-sky-500 {newTechPopup &&
-														selectedProject === project
+														selectedProjectPreview === project
 															? ''
 															: 'hidden'} overflow-y-auto"
 														on:focusout={() => (newTechPopup = false)}
@@ -905,7 +954,11 @@
 								</div>
 								<button
 									on:click={() => {
-										if (data.projectsPage) data.projectsPage.engineeringProjects = [...(data.projectsPage.engineeringProjects || []), templateProject];
+										if (data.projectsPage)
+											data.projectsPage.engineeringProjects = [
+												...(data.projectsPage.engineeringProjects || []),
+												templateProject
+											];
 										console.log('added project');
 									}}
 								>
@@ -940,6 +993,469 @@
 								}}
 							></Button>
 						{/if}
+						<div
+							class="{descriptionPopup
+								? ''
+								: 'hidden'} absolute border-2 bg-slate-800 border-slate-500 w-3/4 h-3/4 left-[12.5%] top-[10%] rounded-2xl shadow-2xl overflow-auto"
+						>
+							{#if selectedProject && selectedProject.description && selectedProject.description.subheadings}
+								<label for="" class="absolute left-[4%] top-[4%]">
+									Project Overview:
+								</label>
+								<textarea
+									name="overview"
+									id=""
+									class="absolute bg-transparent resize-none left-[2.5%] top-[8%] rounded-2xl w-[95%] h-[20%]"
+									bind:value={selectedProject.description.overview}
+								/>
+								<div class="absolute w-full h-full top-[30%]">
+									{#each selectedProject.description.subheadings || [] as subHeading}
+										<div
+											class="w-[95%] left-[2.5%] mt-[2%] px-[2%] h-1/2 border border-slate-500 relative rounded-2xl"
+										>
+											<label
+												for=""
+												class="absolute left-[4%] top-[6%] text-xl"
+											>
+												Title:
+											</label>
+											<input
+												type="text"
+												bind:value={subHeading.title}
+												class="absolute left-[10%] w-48 text-xl bg-transparent focus:outline-none pl-2 focus:border-sky-500 transitiona-all duration-200 border-0 border-b"
+											/>
+											<label
+												class="inline-flex items-center cursor-pointer absolute left-[4%] top-[24%]"
+											>
+												<input
+													type="checkbox"
+													bind:checked={subHeading.html}
+													class="sr-only peer"
+												/>
+												<div
+													class="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-slate-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+												></div>
+												<span
+													class="ms-3 text-sm font-medium text-slate-400 dark:text-gray-300"
+													>HTML</span
+												>
+											</label>
+											<label for="" class="absolute left-[4%] top-[36%]">
+												Content:
+											</label>
+											<textarea
+												name="content"
+												id=""
+												class="absolute bg-transparent resize-none left-[2%] top-[50%] rounded-2xl w-[40%] h-[40%]"
+												bind:value={subHeading.content}
+											/>
+											<div
+												id="Sub Heading Images"
+												class=" absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subHeading.html ||
+												subHeading.subheadings
+													? 'hidden'
+													: ''}"
+											>
+												<h1 class="text-xl">Images</h1>
+												{#each subHeading.images || [] as image}
+													<div
+														class="w-[95%] h-[80%] border border-slate-500 relative rounded-2xl overflow-auto"
+													>
+														<AnimatedInputLabel
+															name="Image URL"
+															bind:value={image.imgURL}
+															labelbg="bg-slate-800"
+															size="ml-2 relative -top-2"
+															height="w-12"
+														></AnimatedInputLabel>
+														<AnimatedInputLabel
+															name="Image Alt"
+															bind:value={image.alt}
+															labelbg="bg-slate-800"
+															size="ml-2 relative -top-2"
+															height="w-12"
+														></AnimatedInputLabel>
+														<AnimatedInputLabel
+															name="Image Caption"
+															bind:value={image.caption}
+															labelbg="bg-slate-800"
+															size="ml-2 relative -top-2"
+															height="w-12"
+														></AnimatedInputLabel>
+														<AnimatedInputLabel
+															name="CSS (Tailwind style)"
+															bind:value={image.css}
+															labelbg="bg-slate-800"
+															size="ml-2 relative -top-2"
+															height="w-12"
+														></AnimatedInputLabel>
+														<Image
+															{image}
+															divStyle="right-[2%] top-[40%] "
+														/>
+														<button
+															class="absolute top-1 right-[0.125rem] hover:text-red-500"
+															on:click={() => {
+																if (subHeading.images)
+																	subHeading.images =
+																		subHeading.images.filter(
+																			(i) => i !== image
+																		);
+															}}
+														>
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																fill="none"
+																viewBox="0 0 24 24"
+																stroke-width="1.5"
+																stroke="currentColor"
+																class="size-5"
+															>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+																/>
+															</svg>
+														</button>
+													</div>
+												{/each}
+												<button
+													class="group absolute left-[4%]"
+													on:click={() => {
+														if (subHeading)
+															subHeading.images = [
+																...(subHeading.images || []),
+																{ imgURL: '', alt: '', caption: '' }
+															];
+													}}
+												>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														fill="none"
+														viewBox="0 0 24 24"
+														stroke-width="1.5"
+														stroke="currentColor"
+														class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															d="M12 4.5v15m7.5-7.5h-15"
+														/>
+													</svg>
+												</button>
+											</div>
+											<div
+												class="absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subHeading.html
+													? ''
+													: 'hidden'}"
+											>
+												{@html subHeading.content}
+											</div>
+											<div
+												class="absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subHeading.subheadings
+													? ''
+													: 'hidden'}"
+											>
+												<button
+													on:click={() => {
+														subsubheadingsPopup = true;
+														selectedSubHeading = subHeading;
+													}}
+													class="border border-slate-500 hover:text-sky-500 hover:scale-105 transition-all duration-200 p-2 rounded-2xl mt-[2%]"
+												>
+													Open Sub-Sub Headings popup
+												</button>
+											</div>
+
+											<button
+												class="absolute top-1 right-[0.125rem] hover:text-red-500"
+												on:click={() => {
+													if (selectedProject?.description?.subheadings)
+														selectedProject.description.subheadings =
+															selectedProject.description.subheadings.filter(
+																(s) => s !== subHeading
+															);
+												}}
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="size-5"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+													/>
+												</svg>
+											</button>
+										</div>
+									{/each}
+									<button
+										class="group absolute left-[4%]"
+										on:click={() => {
+											if (selectedProject.description)
+												selectedProject.description.subheadings = [
+													...(selectedProject.description.subheadings ||
+														[]),
+													{
+														title: 'Sub Heading',
+														content: '',
+														images: []
+													}
+												];
+										}}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M12 4.5v15m7.5-7.5h-15"
+											/>
+										</svg>
+									</button>
+								</div>
+								<button
+									class="group absolute top-1 right-1"
+									on:click={() => {
+										descriptionPopup = false;
+									}}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="size-6 rotate-45 transition-all duration-200 group-hover:stroke-red-500"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12 4.5v15m7.5-7.5h-15"
+										/>
+									</svg>
+								</button>
+							{/if}
+						</div>
+						<div
+							class="absolute border-2 bg-slate-800 border-slate-500 w-3/4 h-3/4 left-[12.5%] top-[10%] rounded-2xl shadow-2xl overflow-auto {subsubheadingsPopup
+								? ''
+								: 'hidden'}"
+						>
+							{#if selectedSubHeading && selectedSubHeading.subheadings}
+								{#each selectedSubHeading.subheadings || [] as subsubHeading}
+									<div
+										class="w-[95%] left-[2.5%] mt-[2%] px-[2%] h-1/2 border border-slate-500 relative rounded-2xl"
+									>
+										<label for="" class="absolute left-[4%] top-[6%] text-sm">
+											Title:
+										</label>
+										<input
+											type="text"
+											bind:value={subsubHeading.title}
+											class="absolute left-[10%] w-48 text-xl bg-transparent focus:outline-none pl-2 focus:border-sky-500 transitiona-all duration-200 border-0 border-b"
+										/>
+										<label
+											class="inline-flex items-center cursor-pointer absolute left-[4%] top-[24%]"
+										>
+											<input
+												type="checkbox"
+												bind:checked={subsubHeading.html}
+												class="sr-only peer"
+											/>
+											<div
+												class="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-slate-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+											></div>
+											<span
+												class="ms-3 text-sm font-medium text-slate-400 dark:text-gray-300"
+												>HTML</span
+											>
+										</label>
+										<label for="" class="absolute left-[4%] top-[36%]">
+											Content:
+										</label>
+										<textarea
+											name="content"
+											id=""
+											class="absolute bg-transparent resize-none left-[2%] top-[50%] rounded-2xl w-[40%] h-[40%]"
+											bind:value={subsubHeading.content}
+										/>
+										<div
+											id="Sub Heading Images"
+											class=" absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subsubHeading.html
+												? 'hidden'
+												: ''}"
+										>
+											<h1 class="text-xl">Images</h1>
+											{#each subsubHeading.images || [] as image}
+												<div
+													class="w-[95%] h-[80%] border border-slate-500 relative rounded-2xl overflow-auto"
+												>
+													<AnimatedInputLabel
+														name="Image URL"
+														bind:value={image.imgURL}
+														labelbg="bg-slate-800"
+														size="ml-2 relative -top-2"
+														height="w-12"
+													></AnimatedInputLabel>
+													<AnimatedInputLabel
+														name="Image Alt"
+														bind:value={image.alt}
+														labelbg="bg-slate-800"
+														size="ml-2 relative -top-2"
+														height="w-12"
+													></AnimatedInputLabel>
+													<AnimatedInputLabel
+														name="Image Caption"
+														bind:value={image.caption}
+														labelbg="bg-slate-800"
+														size="ml-2 relative -top-2"
+														height="w-12"
+													></AnimatedInputLabel>
+													<AnimatedInputLabel
+														name="CSS (Tailwind style)"
+														bind:value={image.css}
+														labelbg="bg-slate-800"
+														size="ml-2 relative -top-2"
+														height="w-12"
+													></AnimatedInputLabel>
+													<Image
+														{image}
+														divStyle="right-[2%] top-[40%] "
+													/>
+													<button
+														class="absolute top-1 right-[0.125rem] hover:text-red-500"
+														on:click={() => {
+															if (subsubHeading.images)
+																subsubHeading.images =
+																	subsubHeading.images.filter(
+																		(i) => i !== image
+																	);
+														}}
+													>
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															fill="none"
+															viewBox="0 0 24 24"
+															stroke-width="1.5"
+															stroke="currentColor"
+															class="size-5"
+														>
+															<path
+																stroke-linecap="round"
+																stroke-linejoin="round"
+																d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+															/>
+														</svg>
+													</button>
+												</div>
+											{/each}
+											<button
+												class="group absolute left-[4%]"
+												on:click={() => {
+													if (subsubHeading)
+														subsubHeading.images = [
+															...(subsubHeading.images || []),
+															{
+																imgURL: '',
+																alt: '',
+																caption: ''
+															}
+														];
+												}}
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke-width="1.5"
+													stroke="currentColor"
+													class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="M12 4.5v15m7.5-7.5h-15"
+													/>
+												</svg>
+											</button>
+										</div>
+										<div
+											class="absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subsubHeading.html
+												? ''
+												: 'hidden'}"
+										>
+											{@html subsubHeading.content}
+										</div>
+										<div
+											class="absolute w-[50%] right-[2.5%] mt-[1.25%] px-[2%] h-[90%] border border-slate-500 rounded-2xl overflow-auto {subsubHeading.subheadings
+												? ''
+												: 'hidden'}"
+										></div>
+										<button
+											class="absolute top-1 right-[0.125rem] hover:text-red-500"
+											on:click={() => {
+												if (selectedSubHeading.subheadings)
+													selectedSubHeading.subheadings =
+														selectedSubHeading.subheadings.filter(
+															(s) => s !== subsubHeading
+														);
+											}}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke-width="1.5"
+												stroke="currentColor"
+												class="size-5"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+												/>
+											</svg>
+										</button>
+									
+									</div>
+								{/each}
+							{/if}
+							<button
+							class="group absolute top-1 right-1"
+							on:click={() => {
+								subsubheadingsPopup = false;
+							}}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-6 rotate-45 transition-all duration-200 group-hover:stroke-red-500"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 4.5v15m7.5-7.5h-15"
+								/>
+							</svg>
+						</button>
+						</div>
 					{:else if selectedPage === 'about-me'}{/if}
 				</div>
 			</div>

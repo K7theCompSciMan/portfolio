@@ -16,16 +16,35 @@ export type Data = {
 		programmingProjects?: Project[];
 	};
 };
+export type Image = {
+	imgURL?: string;
+	alt?: string;
+	onclick?: () => void;
+	caption?: string;
+	css?: string;
+};
 
+
+export type SubHeading = {
+	images?: Image[];
+	title?: string;
+	content?: string;
+	html?: boolean;
+	subheadings?: SubHeading[];
+};
+export type Description = {
+	overview?: string;
+	subheadings?: SubHeading[];
+};
 export type Project = {
 	name?: string;
 	date?: string;
 	category?: string;
 	technologies?: Technology[];
-	description?: string;
+	description?: Description;
 	image?: string;
 	url?: string;
-}
+};
 export type ProjectPreview = {
 	name?: string;
 	date?: string;
