@@ -32,6 +32,8 @@ export type SubHeading = {
 	content?: string;
 	html?: boolean;
 	subheadings?: SubHeading[];
+	showSubHeadings?: boolean;
+	border?: boolean;
 };
 export type Description = {
 	overview?: string;
