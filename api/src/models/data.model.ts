@@ -1,6 +1,3 @@
-import fs from 'vite-plugin-fs/browser';
-import { getXataClient, type Data as XataData } from './xata';
-import { configDotenv } from 'dotenv';
 export type Data = {
 	homePage?: {
 		headline?: {
@@ -61,18 +58,8 @@ export type Technology = {
 	url: string;
 	logo?: string;
 };
-export const getData = async (): Promise<Data> =>{ 
-	return (await fetch("https://k7-portfolio.fly.dev/data")).json();
 
+export type XataData = {
+    data: Data,
+    name: string
 }
-export const setData = async (newData: Data) => {
-	console.log(await (await fetch("https://k7-portfolio.fly.dev/data", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(newData),
-	})).json())
-};
-
-console.log(await getData());

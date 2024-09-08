@@ -24,7 +24,7 @@
 		loggedIn = true;
 	}
 
-	let selectedPage = 'projects';
+	let selectedPage = 'home';
 	let templateProjectPreview: ProjectPreview = {
 		name: 'Project Name',
 		date: '2024',
