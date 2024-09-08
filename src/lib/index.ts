@@ -74,3 +74,4 @@ export const setData = async (newData: Data) => {
 		body: JSON.stringify(newData),
 	})).json())
 };
+
