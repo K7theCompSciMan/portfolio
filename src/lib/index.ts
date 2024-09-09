@@ -1,6 +1,3 @@
-import fs from 'vite-plugin-fs/browser';
-import { getXataClient, type Data as XataData } from './xata';
-import { configDotenv } from 'dotenv';
 export type Data = {
 	homePage?: {
 		headline?: {
