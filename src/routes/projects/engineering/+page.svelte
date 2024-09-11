@@ -32,7 +32,7 @@
 			projects.length
 				? 'mb-[2%]'
 				: 'mb-[10%]'}"
-                on:click={() => window.location.pathname=`/projects/engineering/${project.name?.trim().replaceAll(' ', '-')}`}
+                on:click={() => window.location.pathname=`/projects/${project.name?.trim().replaceAll(' ', '-')}`}
 		>
 			<div
 				class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"

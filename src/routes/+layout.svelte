@@ -37,7 +37,7 @@
 			</button>
 		</div>
 		<div
-			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[70%] flex-row flex align-middle justify-center items-center text-sm"
+			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[80%] flex-row flex align-middle justify-center items-center text-md"
 		>
 			<Button
 				name="Home"

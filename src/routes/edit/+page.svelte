@@ -96,6 +96,11 @@
 			name: 'RobotC',
 			url: 'https://www.robotc.net',
 			logo: 'data:image/png;base64,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'
+		},
+		{
+			name: "Rust",
+			url: "https://www.rust-lang.org/",
+			logo: "https://www.rust-lang.org/static/images/rust-logo-blk.svg"
 		}
 	];
 	let selectedProjectPreview: ProjectPreview;
@@ -289,31 +294,47 @@
 												height="w-24"
 												width="w-36"
 											></AnimatedInputLabel>
-											{#if project.technologies != undefined}
+											<label
+												class="inline-flex items-center cursor-pointer absolute left-[24%] top-[32%]"
+											>
+												<input
+													type="checkbox"
+													bind:checked={project.completed}
+													class="sr-only peer"
+												/>
 												<div
-													class="absolute border-slate-500 border-[1px] w-fit pr-[10%] pb-2 pt-1 h-fit rounded-2xl right-[2%] bottom-[20%] flex flex-row"
+													class="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-slate-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+												></div>
+												<span
+													class="ms-3 text-sm font-medium text-slate-400 dark:text-gray-300"
+													>Completed</span
 												>
-													<label
-														for=""
-														class="absolute left-[8%] text-md bottom-[100%]"
-														>Technologies</label
-													>
+											</label>
+											{#if project.technologies != undefined}
+											<label
+												for=""
+												class="absolute right-[8%] text-md bottom-[45%]"
+												>Technologies</label
+											>
+												<div
+													class="absolute border-slate-500 border-[1px] w-fit max-w-[60%] overflow-x-scroll pr-[10%] pb-2 pt-1 h-fit max-h-[24%] rounded-2xl right-[2%] bottom-[20%] flex flex-row items-center"
+												>
 													{#each project.technologies || [{ name: 'tech', url: '' }, { name: 'somethingnew', url: '' }] as tech}
 														<div
-															class="border-slate-500 border-[1px] rounded-xl w-fit h-fit px-2 ml-2 mt-1 cursor-pointer flex flex-row"
+															class="border-slate-500 border-[1px] rounded-xl h-fit relative px-2 ml-2 mt-1 cursor-pointer flex flex-row items-center gap-2"
 														>
 															{#if tech.url}
-																<img
+																<div class="flex"><img
 																	src={tech.logo}
 																	alt={tech.name}
 																	class="size-4 mr-2 mt-1"
 																/>
-																{tech.name}
+																{tech.name}</div>
 															{:else}
 																{tech.name}
 															{/if}
 															<button
-																class="w-fit h-fit mt-[0.125rem] relative top-[3px] hover:text-red-500 ml-1"
+																class="w-fit h-fit mt-[0.125rem] hover:text-red-500"
 																on:click={() => {
 																	project.technologies =
 																		project.technologies?.filter(
@@ -450,8 +471,13 @@
 								</div>
 								<button
 									on:click={() => {
-										data.homePage?.projects?.push(templateProjectPreview);
-										console.log('added project');
+										if (data.homePage) {
+											data.homePage.projects = [
+												...(data.homePage?.projects || []),
+												templateProject
+											];
+											console.log('added project');
+										}
 									}}
 								>
 									<Tooltip
@@ -927,9 +953,9 @@
 											<button
 												class="absolute top-1 right-[0.125rem] hover:text-red-500"
 												on:click={() => {
-													if (data.projectsPage?.engineeringProjects)
-														data.projectsPage.engineeringProjects =
-															data.projectsPage.engineeringProjects.filter(
+													if (data.projectsPage?.programmingProjects)
+														data.projectsPage.programmingProjects =
+															data.projectsPage.programmingProjects.filter(
 																(p) => p !== project
 															);
 												}}
@@ -955,8 +981,8 @@
 								<button
 									on:click={() => {
 										if (data.projectsPage)
-											data.projectsPage.engineeringProjects = [
-												...(data.projectsPage.engineeringProjects || []),
+											data.projectsPage.programmingProjects = [
+												...(data.projectsPage.programmingProjects || []),
 												templateProject
 											];
 										console.log('added project');
@@ -1476,31 +1502,30 @@
 												/>
 											</svg>
 										</button>
-									
 									</div>
 								{/each}
 							{/if}
 							<button
-							class="group absolute top-1 right-1"
-							on:click={() => {
-								subsubheadingsPopup = false;
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="size-6 rotate-45 transition-all duration-200 group-hover:stroke-red-500"
+								class="group absolute top-1 right-1"
+								on:click={() => {
+									subsubheadingsPopup = false;
+								}}
 							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 4.5v15m7.5-7.5h-15"
-								/>
-							</svg>
-						</button>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="size-6 rotate-45 transition-all duration-200 group-hover:stroke-red-500"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 4.5v15m7.5-7.5h-15"
+									/>
+								</svg>
+							</button>
 						</div>
 					{:else if selectedPage === 'about-me'}{/if}
 				</div>

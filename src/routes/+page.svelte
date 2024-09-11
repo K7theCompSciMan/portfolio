@@ -26,36 +26,13 @@
 			renderByPixels: true,
 			alwaysShowTracks: false
 		});
+		if (data.homePage) {
+			data.homePage?.projects?.sort(
+				(a, b) => (b.date! as unknown as number) - (a.date! as unknown as number)
+			);
+			console.log(data.homePage.projects);
+		}
 	});
-	interface Project {
-		link?: string;
-		title: string;
-		img: string;
-		description: string;
-	}
-	let wordGuesser: Project = {
-		link: 'https://my-wordle-stuff.vercel.app/',
-		title: 'Word Guesser',
-		img: WordGuesser,
-		description:
-			'I made this word guessing game in two versions. One was made using Svelte, like this website, and the other was made using plain HTML, CSS, and JavaScript. I really enjoyed working on this project. It taught me lots about web development. I learned about apis, including fetching them, and using them. This was also my first project I made using svelte, and I used many of the features that Svelte brags, including iteration and logic statements within html tags. I also used tailwindcss for styiling, and it was very enjoyable. This project was a very fun project, yet it also came with its own difficulties. It had also taught me lots about programming and web development. I had lots of failures, and lots of unexpected problems, yet in the end, I had perservered through it all, and finished with a product I am very proud of.'
-	};
-
-	let audioPlayer: Project = {
-		link: 'https://github.com/K7theCompSciMan/My-Coding-Stuff/blob/master/Java/Practice/AudioFrame.java',
-		title: 'Audio Player',
-		img: AudioPlayer,
-		description:
-			'This program was one of the first programs I had made using Java. It was a very fun project, and it taught me lots about Java. This project mostly used the Java GUI libraries, and it tested my abilities and proficiency with Java GUI. This project also taught me about object oriented programming, one of the most important principles of programming. Using the skills I learned working on this project, I plan on making many more Java GUI programs. This could range from simple games, to applications that I use on a daily basis, like an offline video player.'
-	};
-
-	let pongGame: Project = {
-		link: 'https://github.com/K7theCompSciMan/My-Coding-Stuff/blob/master/Python/pong.py',
-		title: 'Pong Game',
-		img: PongGame,
-		description:
-			'This project was made using the pygame library in Python. It was a very fun project, and it taught me lots about Python. This project mostly used the pygame library, and it tested my abilities and proficiency with Python. This project also taught me about pygame, as I was interested in game development. I had wanted to use pygame to create some sort of game in Python, and this was the first one I had made. It was a difficult project and taught me a lot about pygame, and libraries in Python. Using the skills I learned working on this project, I plan on making many more python programs. I plan on making more games, using pygame or other libraries, but also making programs that teach me more about this wonderful language, and the wonders of computer science.'
-	};
 </script>
 
 {#await getData()}
@@ -65,7 +42,7 @@
 	>
 		Loading...
 	</h1>
-{:then data}
+{:then something}
 	<div
 		class="h-[94vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar flex flex-col fixed bg-slate-800 w-screen"
 		id="scrollable"
@@ -127,28 +104,33 @@
 					<span
 						class="font-bold {i == 0 ? 'text-sky-500' : ''} {i == 1
 							? 'text-rose-200'
-							: ''} {i == 2 ? 'text-violet-600' : ''} mb-3 cursor-pointer"
+							: ''} {i == 2 ? 'text-violet-600' : ''} mb-3 cursor-default"
 						>{text}</span
 					>
 				{/each}
 			{/if}
 		</div>
+		<div class="ml-[8%] w-[84%] mt-[2%]" id="info"></div>
 		<div class="ml-[8%] w-[84%] mt-[2%]">
 			<h1
 				class="w-full h-fit text-4xl text-violet-600 text-start border-b-2 border-slate-500 pb-4 mb-4"
 			>
-				My Projects
+				My Latest Projects
 			</h1>
 			{#if data.homePage?.projects}
 				<div id="projects" class="">
 					{#each data.homePage.projects || [{ name: 'Word Guesser', date: '2022', category: 'Web Dev', technologies: [{ name: 'Svelte', url: 'https://svelte.dev/' }] }] as project, i}
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div
-							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-default {i +
+							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-pointer {i +
 								1 <
 							data.homePage.projects.length
 								? 'mb-[2%]'
 								: 'mb-[10%]'}"
-							in:fly={{ x: i % 2 == 0 ? -100 : 100 }}
+							in:fly={{ x: -100, delay: 100, duration: 3000 }}
+							on:click={() =>
+								(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 						>
 							<div
 								class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"
@@ -161,13 +143,13 @@
 								<div class="text-md pl-[4%] font-thin">{project.date}</div>
 							</div>
 							<div
-								class="relative overflow-auto h-full w-1/3 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] transition-all duration-[400ms]"
+								class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] transition-all duration-[400ms]"
 							>
 								<div class="text-2xl font-bold">{project.category}</div>
 								<div class="flex flex-row-reverse">
 									<!-- svelte-ignore a11y-click-events-have-key-events -->
 									<!-- svelte-ignore a11y-no-static-element-interactions -->
-									{#each project.technologies || [] as tech}
+									{#each project.technologies?.reverse() || [] as tech}
 										<!-- svelte-ignore a11y-click-events-have-key-events -->
 										<div
 											class="border-slate-500 text-left border-[1px] rounded-xl h-6 w-fit max-w-full overflow-clip px-2 pb-4 ml-2 mt-1 cursor-pointer flex flex-row"
@@ -176,7 +158,7 @@
 											<img
 												src={tech.logo}
 												alt={tech.name}
-												class="size-4 mr-2 mt-1 "
+												class="size-4 mr-2 mt-1"
 											/>
 											{tech.name}
 										</div>

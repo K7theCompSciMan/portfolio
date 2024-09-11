@@ -6,7 +6,7 @@
 </script>
 
 <button
-	class="{textColor} flex flex-row hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] text-center {more}"
+	class="{textColor} flex flex-row justify-center items-center hover:text-sky-500 transition-all duration-[50ms] hover:scale-[1.05] text-center {more}"
 	on:click={onclick}
 >
 	{#if name === 'Home'}
@@ -16,7 +16,7 @@
 			viewBox="0 0 24 24"
 			stroke-width="1.5"
 			stroke="currentColor"
-			class="size-4 mr-1 pt-1"
+			class="size-5 mr-0 pt-1"
 		>
 			<path
 				stroke-linecap="round"
@@ -33,7 +33,7 @@
 			viewBox="0 0 24 24"
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
-			class="size-4 mr-1 pt-1"
+			class="size-5 mr-0 pt-1"
 		>
 			<path
 				stroke-linecap="round"
@@ -50,7 +50,7 @@
 			viewBox="0 0 24 24"
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
-			class="size-4 mr-1 pt-1"
+			class="size-5 mr-0 pt-1"
 		>
 			<path
 				stroke-linecap="round"
@@ -59,7 +59,7 @@
 			></path>
 		</svg>
 	{/if}
-	<p class="w-fit ml-2">
+	<p class="w-fit ml-0">
 		{name}
 	</p>
 </button>

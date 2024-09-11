@@ -7,6 +7,10 @@ export type Data = {
 			location?: string;
 			tagline?: string[];
 		};
+		info?: {
+
+			techStack: Technology[];
+		}
 		projects?: ProjectPreview[];
 	};
 	aboutPage?: {};
@@ -46,12 +50,14 @@ export type Project = {
 	description?: Description;
 	image?: string;
 	url?: string;
+	completed?: boolean;
 };
 export type ProjectPreview = {
 	name?: string;
 	date?: string;
 	category?: string;
 	technologies?: Technology[];
+	completed?: boolean;
 };
 export type Technology = {
 	name: string;
