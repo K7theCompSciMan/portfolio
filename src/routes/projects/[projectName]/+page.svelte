@@ -13,7 +13,7 @@
 		// 	alwaysShowTracks: false
 		// });
 		let data = await getData();
-		project = data.projectsPage?.engineeringProjects?.find(
+		project = [...data.projectsPage?.engineeringProjects!, ...data.projectsPage?.programmingProjects!].find(
 			(p) =>
 				p.name?.trim().replaceAll(' ', '-') ===
 				$page.params.projectName.trim().replaceAll(' ', '-')
@@ -24,7 +24,7 @@
 </script>
 
 <div
-	class="h-[88.3vh] text-slate-400 overflow-auto scroll-m-8 fixed w-screen bg-slate-800"
+	class="h-[88.3%] text-slate-400 overflow-auto scroll-m-8 fixed w-screen bg-slate-800"
 	id="scrollable"
 >
 	{#if project}

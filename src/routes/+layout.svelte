@@ -10,7 +10,7 @@
 	});
 </script>
 
-<div class="max-h-screen justify-center text-center bg-slate-800 relative">
+<div class="max-h-screen h-screen justify-center text-center bg-slate-800 relative w-screen">
 	<nav
 		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center overflow-auto shadow-md rounded-xl relative"
 	>
@@ -37,7 +37,7 @@
 			</button>
 		</div>
 		<div
-			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[80%] flex-row flex align-middle justify-center items-center text-md"
+			class="rounded-3xl border-[1px] border-slate-500 w-[18%] h-[80%] flex-row flex align-middle justify-center items-center text-md md:text-sm"
 		>
 			<Button
 				name="Home"

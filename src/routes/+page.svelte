@@ -11,6 +11,7 @@
 	import AnimatedText from '$lib/AnimatedText.svelte';
 	import { goto } from '$app/navigation';
 	import { getData, type Data } from '$lib';
+	import ProjectPreview from '$lib/ProjectPreview.svelte';
 	let data: Data = {
 		homePage: {
 			headline: {
@@ -53,7 +54,7 @@
 			in:fly={{ y: -100, duration: 1000 }}
 		>
 			{#if data.homePage?.headline}
-				<div class="flex flex-row text-2xl scale-150 pb-6">
+				<div class="flex flex-row text-2xl scale-150 pb-6 relative">
 					<img
 						src={data.homePage.headline.imgURL}
 						alt="Kesavan Rangarajan"
@@ -96,8 +97,8 @@
 					</button> -->
 					<Tooltip
 						content={data.homePage.headline.location ||
-							'Marietta, Georgia, United States'}
-						id="location-tooltip"
+							'Atlanta, Georgia, United States'}
+						tooltip_placement="w-[800%] -top-[60%] -right-[350%]"
 					></Tooltip>
 				</div>
 				{#each data.homePage.headline.tagline || [] as text, i}
@@ -122,50 +123,7 @@
 					{#each data.homePage.projects || [{ name: 'Word Guesser', date: '2022', category: 'Web Dev', technologies: [{ name: 'Svelte', url: 'https://svelte.dev/' }] }] as project, i}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
-						<div
-							class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-pointer {i +
-								1 <
-							data.homePage.projects.length
-								? 'mb-[2%]'
-								: 'mb-[10%]'}"
-							in:fly={{ x: -100, delay: 100, duration: 3000 }}
-							on:click={() =>
-								(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
-						>
-							<div
-								class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"
-							>
-								<div
-									class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500"
-								>
-									{project.name}
-								</div>
-								<div class="text-md pl-[4%] font-thin">{project.date}</div>
-							</div>
-							<div
-								class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] transition-all duration-[400ms]"
-							>
-								<div class="text-2xl font-bold">{project.category}</div>
-								<div class="flex flex-row-reverse">
-									<!-- svelte-ignore a11y-click-events-have-key-events -->
-									<!-- svelte-ignore a11y-no-static-element-interactions -->
-									{#each project.technologies?.reverse() || [] as tech}
-										<!-- svelte-ignore a11y-click-events-have-key-events -->
-										<div
-											class="border-slate-500 text-left border-[1px] rounded-xl h-6 w-fit max-w-full overflow-clip px-2 pb-4 ml-2 mt-1 cursor-pointer flex flex-row"
-											on:click={() => window.open(tech.url, '_blank')}
-										>
-											<img
-												src={tech.logo}
-												alt={tech.name}
-												class="size-4 mr-2 mt-1"
-											/>
-											{tech.name}
-										</div>
-									{/each}
-								</div>
-							</div>
-						</div>
+						<ProjectPreview {project} length={data.homePage.projects.length} {i}></ProjectPreview>
 					{/each}
 				</div>
 			{/if}

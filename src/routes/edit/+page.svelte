@@ -64,7 +64,7 @@
 	onMount(async () => {
 		data = await getData();
 	});
-	$: console.log(data);
+	// $: console.log(selectedProject);
 	const saveData = async () => {
 		console.log('unsaved', data);
 		await setData(data);
@@ -85,10 +85,10 @@
 		{
 			name: 'Java',
 			url: 'https://www.java.com/en/',
-			logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Java_Logo.svg/1200px-Java_Logo.svg.png'
+			logo: 'data:image/png;base64,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'
 		},
 		{
-			name: 'VEX Robotics',
+			name: 'VEX',
 			url: 'https://www.vexrobotics.com/',
 			logo: 'https://kb.vex.com/hc/article_attachments/29769144398996'
 		},
@@ -98,9 +98,9 @@
 			logo: 'data:image/png;base64,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'
 		},
 		{
-			name: "Rust",
-			url: "https://www.rust-lang.org/",
-			logo: "https://www.rust-lang.org/static/images/rust-logo-blk.svg"
+			name: 'Rust',
+			url: 'https://www.rust-lang.org/',
+			logo: 'https://www.rust-lang.org/static/images/rust-logo-blk.svg'
 		}
 	];
 	let selectedProjectPreview: ProjectPreview;
@@ -311,11 +311,11 @@
 												>
 											</label>
 											{#if project.technologies != undefined}
-											<label
-												for=""
-												class="absolute right-[8%] text-md bottom-[45%]"
-												>Technologies</label
-											>
+												<label
+													for=""
+													class="absolute right-[8%] text-md bottom-[45%]"
+													>Technologies</label
+												>
 												<div
 													class="absolute border-slate-500 border-[1px] w-fit max-w-[60%] overflow-x-scroll pr-[10%] pb-2 pt-1 h-fit max-h-[24%] rounded-2xl right-[2%] bottom-[20%] flex flex-row items-center"
 												>
@@ -324,12 +324,14 @@
 															class="border-slate-500 border-[1px] rounded-xl h-fit relative px-2 ml-2 mt-1 cursor-pointer flex flex-row items-center gap-2"
 														>
 															{#if tech.url}
-																<div class="flex"><img
-																	src={tech.logo}
-																	alt={tech.name}
-																	class="size-4 mr-2 mt-1"
-																/>
-																{tech.name}</div>
+																<div class="flex">
+																	<img
+																		src={tech.logo}
+																		alt={tech.name}
+																		class="size-4 mr-2 mt-1"
+																	/>
+																	{tech.name}
+																</div>
 															{:else}
 																{tech.name}
 															{/if}
@@ -795,12 +797,45 @@
 											<label for="" class="absolute left-[37%] top-[36%]">
 												Description
 											</label>
-											<textarea
-												name=""
-												id=""
-												class="absolute bg-transparent text-slate-400 left-[35%] rounded-2xl top-[50%] h-[30%] w-[25%] resize-none"
-												bind:value={project.description}
-											></textarea>
+											<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+											<!-- svelte-ignore a11y-click-events-have-key-events -->
+											<label
+												for=""
+												class="absolute left-[40%] top-[56%] peer cursor-pointer"
+												on:click={() => {
+													if (!project.description)
+														project.description = {
+															subheadings: [
+																{
+																	title: 'Sub Heading',
+																	content: 'this is a subheading'
+																}
+															]
+														};
+													selectedProject = project;
+													descriptionPopup = true;
+												}}
+											>
+												Description
+											</label>
+											<!-- svelte-ignore a11y-click-events-have-key-events -->
+											<!-- svelte-ignore a11y-no-static-element-interactions -->
+											<div
+												class="absolute bg-transparent text-slate-400 left-[35%] rounded-2xl top-[50%] h-[30%] w-[25%] resize-none border-slate-500 border cursor-pointer"
+												on:click={() => {
+													if (!project.description)
+														project.description = {
+															subheadings: [
+																{
+																	title: 'Sub Heading',
+																	content: 'this is a subheading'
+																}
+															]
+														};
+													selectedProject = project;
+													descriptionPopup = true;
+												}}
+											></div>
 											<AnimatedInputLabel
 												name="Year"
 												bind:value={project.date}
@@ -1029,12 +1064,21 @@
 									Project Overview:
 								</label>
 								<textarea
+								name="overview"
+								id=""
+								class="absolute bg-transparent resize-none left-[2.5%] top-[8%] rounded-2xl w-[95%] h-[20%]"
+								bind:value={selectedProject.description.overview}
+								/>
+								<label for="" class="absolute left-[1%] top-[32%]">
+									Project URL:
+								</label>
+								<textarea
 									name="overview"
 									id=""
-									class="absolute bg-transparent resize-none left-[2.5%] top-[8%] rounded-2xl w-[95%] h-[20%]"
-									bind:value={selectedProject.description.overview}
+									class="absolute bg-transparent resize-none left-[12.5%] top-[30%] rounded-2xl w-[75%] h-[10%]"
+									bind:value={selectedProject.url}
 								/>
-								<div class="absolute w-full h-full top-[30%]">
+								<div class="absolute w-full h-full top-[60%]">
 									{#each selectedProject.description.subheadings || [] as subHeading}
 										<div
 											class="w-[95%] left-[2.5%] mt-[2%] px-[2%] h-1/2 border border-slate-500 relative rounded-2xl"
