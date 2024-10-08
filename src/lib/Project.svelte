@@ -4,6 +4,8 @@
     export let length;
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	class="flex border-slate-500 border rounded-2xl w-[95%] relative left-[2.5%] mt-[2%] h-1/3 group transition-all duration-200 cursor-pointer {i +
 		1 <
@@ -14,7 +16,7 @@
 		(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 >
 	<div
-		class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"
+		class="relative overflow-hidden text-ellipses h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms] "
 	>
 		<div
 			class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500 flex items-center gap-[2%]"
@@ -78,7 +80,7 @@
 					class="border-slate-500 text-left border-[1px] rounded-xl h-6 w-fit max-w-full overflow-clip px-2 pb-4 ml-2 mt-1 cursor-pointer flex flex-row"
 					on:click={() => window.open(tech.url, '_blank')}
 				>
-					<img src={tech.logo} alt={tech.name} class="size-4 mr-2 mt-1" />
+					<img src={tech.logo} alt={tech.name} class="size-4 w-fit mr-2 mt-1" />
 					{tech.name}
 				</div>
 			{/each}

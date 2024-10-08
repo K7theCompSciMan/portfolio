@@ -10,7 +10,7 @@
 	});
 </script>
 
-<div class="max-h-screen h-screen justify-center text-center bg-slate-800 relative w-screen">
+<div class="max-h-screen h-screen min-h-screen overflow-clip justify-center text-center bg-slate-800 relative w-screen">
 	<nav
 		class="h-[6vh] border-b-[1px] border-slate-500 flex-row flex justify-center align-middle items-center overflow-auto shadow-md rounded-xl relative"
 	>

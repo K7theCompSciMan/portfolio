@@ -78,7 +78,7 @@
 					class="border-slate-500 text-left border-[1px] rounded-xl h-6 w-fit max-w-full overflow-clip px-2 pb-4 ml-2 mt-1 cursor-pointer flex flex-row"
 					on:click={() => window.open(tech.url, '_blank')}
 				>
-					<img src={tech.logo} alt={tech.name} class="size-4 mr-2 mt-1" />
+					<img src={tech.logo} alt={tech.name} class="size-4 w-fit mr-2 mt-1" />
 					{tech.name}
 				</div>
 			{/each}

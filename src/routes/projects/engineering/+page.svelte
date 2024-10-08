@@ -21,12 +21,14 @@
 </script>
 
 <div
-	class="h-[88vh] text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar"
+	class="h-[87.8vh] text-slate-400 overflow-auto no-scrollbar::-webkit-scrollbar"
 	id="scrollable"
 >
+<div class="h-full overflow-auto ">
 	{#each projects as project, i}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<Project {project} {i} length={projects.length}></Project>
 	{/each}
+</div>
 </div>

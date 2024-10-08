@@ -101,6 +101,16 @@
 			name: 'Rust',
 			url: 'https://www.rust-lang.org/',
 			logo: 'https://www.rust-lang.org/static/images/rust-logo-blk.svg'
+		},
+		{
+			name: 'Python',
+			url: 'https://www.python.org/',
+			logo: 'https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png'
+		},
+		{
+			name: '',
+			url: 'https://www.pygame.org/',
+			logo: 'https://www.pygame.org/docs/_images/pygame_lofi.png'
 		}
 	];
 	let selectedProjectPreview: ProjectPreview;
@@ -328,7 +338,7 @@
 																	<img
 																		src={tech.logo}
 																		alt={tech.name}
-																		class="size-4 mr-2 mt-1"
+																		class="size-4 w-fit mr-2 mt-1"
 																	/>
 																	{tech.name}
 																</div>
@@ -476,7 +486,7 @@
 										if (data.homePage) {
 											data.homePage.projects = [
 												...(data.homePage?.projects || []),
-												templateProject
+												{...templateProject}
 											];
 											console.log('added project');
 										}
@@ -552,6 +562,22 @@
 											>
 												Description
 											</label>
+											<label
+												class="inline-flex items-center cursor-pointer absolute left-[12%] top-[32%]"
+											>
+												<input
+													type="checkbox"
+													bind:checked={project.completed}
+													class="sr-only peer"
+												/>
+												<div
+													class="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-slate-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+												></div>
+												<span
+													class="ms-3 text-sm font-medium text-slate-400 dark:text-gray-300"
+													>Completed</span
+												>
+											</label>
 											<!-- svelte-ignore a11y-click-events-have-key-events -->
 											<div
 												class="absolute bg-transparent text-slate-400 left-[35%] rounded-2xl top-[50%] h-[30%] w-[25%] resize-none border-slate-500 border cursor-pointer"
@@ -604,7 +630,7 @@
 																<img
 																	src={tech.logo}
 																	alt={tech.name}
-																	class="size-4 mr-2 mt-1"
+																	class="size-4 w-fit mr-2 mt-1"
 																/>
 																{tech.name}
 															{:else}
@@ -751,7 +777,7 @@
 										if (data.projectsPage)
 											data.projectsPage.engineeringProjects = [
 												...(data.projectsPage.engineeringProjects || []),
-												templateProject
+												{...templateProject}
 											];
 										console.log('added project');
 									}}
@@ -796,6 +822,22 @@
 											/>
 											<label for="" class="absolute left-[37%] top-[36%]">
 												Description
+											</label>
+											<label
+												class="inline-flex items-center cursor-pointer absolute left-[12%] top-[32%]"
+											>
+												<input
+													type="checkbox"
+													bind:checked={project.completed}
+													class="sr-only peer"
+												/>
+												<div
+													class="relative w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer bg-slate-500 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+												></div>
+												<span
+													class="ms-3 text-sm font-medium text-slate-400 dark:text-gray-300"
+													>Completed</span
+												>
 											</label>
 											<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 											<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -871,7 +913,7 @@
 																<img
 																	src={tech.logo}
 																	alt={tech.name}
-																	class="size-4 mr-2 mt-1"
+																	class="size-4 w-fit mr-2 mt-1"
 																/>
 																{tech.name}
 															{:else}
@@ -1018,7 +1060,7 @@
 										if (data.projectsPage)
 											data.projectsPage.programmingProjects = [
 												...(data.projectsPage.programmingProjects || []),
-												templateProject
+												{...templateProject}
 											];
 										console.log('added project');
 									}}

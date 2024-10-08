@@ -1,12 +1,6 @@
 <script lang="ts">
-	import Heading from '$lib/Heading.svelte';
-	import WordGuesser from '$lib/images/WordGuesser.png';
-	import AudioPlayer from '$lib/images/AudioPlayer.png';
-	import PongGame from '$lib/images/PongGame.png';
-	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Scrollbar from 'smooth-scrollbar';
-	import Button from '$lib/Button.svelte';
 	import { getData, type Project as ProjectType } from '$lib';
 	import Project from '$lib/Project.svelte';
 	let projects: ProjectType[] = [];
@@ -25,18 +19,16 @@
 	});
 </script>
 
-<div
-	class="h-[88vh] bg-slate-800 text-slate-400 overflow-auto scroll-m-8 no-scrollbar::-webkit-scrollbar fixed w-screen"
-	id="scrollable"
->
+<div class="h-[88vh] bg-slate-800 text-slate-400 overflow-auto scroll-m-8 w-screen" id="scrollable">
 	{#await getData()}
 		<h1>Loading...</h1>
 	{:then data}
-		{#each projects as project, i}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<Project {project} {i} length={projects.length}></Project>
-
-		{/each}
+		<div class="h-full overflow-auto">
+			{#each projects as project, i}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<Project {project} {i} length={projects.length}></Project>
+			{/each}
+		</div>
 	{/await}
 </div>
