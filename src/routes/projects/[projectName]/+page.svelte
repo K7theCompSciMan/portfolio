@@ -47,6 +47,11 @@
 				{:else}
 					<p class="relative text-left text-xl pl-[12.5%]">{subHeading.content}</p>
 				{/if}
+				{#if subHeading.images}
+					{#each subHeading.images || [] as image}
+						<Image {image}></Image>
+					{/each}
+				{/if}
 				<button
 					on:click={() => {
 						subHeading.showSubHeadings = !subHeading.showSubHeadings;
