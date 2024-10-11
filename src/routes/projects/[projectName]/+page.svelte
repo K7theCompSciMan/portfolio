@@ -13,12 +13,17 @@
 		// 	alwaysShowTracks: false
 		// });
 		let data = await getData();
-		project = [...data.projectsPage?.engineeringProjects!, ...data.projectsPage?.programmingProjects!].find(
+		project = [
+			...data.projectsPage?.engineeringProjects!,
+			...data.projectsPage?.programmingProjects!
+		].find(
 			(p) =>
 				p.name?.trim().replaceAll(' ', '-') ===
 				$page.params.projectName.trim().replaceAll(' ', '-')
 		);
-		project?.description?.subheadings?.forEach((s) => {s.showSubHeadings = true})
+		project?.description?.subheadings?.forEach((s) => {
+			s.showSubHeadings = true;
+		});
 	});
 	$: console.log(project);
 </script>
@@ -36,12 +41,18 @@
 			<p class="relative text-left text-xl pl-[12.5%]">{project.description?.overview}</p>
 		</div>
 		{#each project.description?.subheadings || [] as subHeading}
-			<div class="relative left-[12.5%] w-[75%] mt-[2%] mb-[2%] {subHeading.border ? 'border-b' : ''} pb-[2%] border-slate-500">
-				<h1
-					class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
-				>
-					{subHeading.title || ''}
-				</h1>
+			<div
+				class="relative left-[12.5%] w-[75%] mt-[2%] mb-[2%] {subHeading.border
+					? 'border-b'
+					: ''} pb-[2%] border-slate-500"
+			>
+				{#if subHeading.title}
+					<h1
+						class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
+					>
+						{subHeading.title || ''}
+					</h1>
+				{/if}
 				{#if subHeading.html}
 					{@html subHeading.content}
 				{:else}
@@ -56,7 +67,9 @@
 					on:click={() => {
 						subHeading.showSubHeadings = !subHeading.showSubHeadings;
 					}}
-					class="w-fit absolute right-[12.5%] top-[2%] text-slate-400 hover:text-sky-500 transition-all duration-200 {subHeading.subheadings ? '' : 'hidden'}"
+					class="w-fit absolute right-[12.5%] top-[2%] text-slate-400 hover:text-sky-500 transition-all duration-200 {subHeading.subheadings
+						? ''
+						: 'hidden'}"
 				>
 					{#if subHeading.showSubHeadings}
 						<svg
@@ -92,15 +105,17 @@
 				</button>
 				{#each subHeading.subheadings || [] as subsubHeading}
 					<div
-						class="relative left-[12.5%] w-[75%] mt-[2%] mb-[2%] border-slate-500 pb-[2%] {subsubHeading.border ? 'border-b' : ''} {subHeading.showSubHeadings
-							? ''
-							: 'hidden'}"
+						class="relative left-[12.5%] w-[75%] mt-[2%] mb-[2%] border-slate-500 pb-[2%] {subsubHeading.border
+							? 'border-b'
+							: ''} {subHeading.showSubHeadings ? '' : 'hidden'}"
 					>
-						<h1
-							class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
-						>
-							{subsubHeading.title || ''}
-						</h1>
+						{#if subsubHeading.title}
+							<h1
+								class="relative text-3xl mt-[2%] font-semi-bold text-sky-500 mb-2 text-left underline"
+							>
+								{subsubHeading.title || ''}
+							</h1>
+						{/if}
 						{#if subsubHeading.html}
 							{@html subsubHeading.content}
 						{:else}
