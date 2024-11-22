@@ -486,7 +486,7 @@
 										if (data.homePage) {
 											data.homePage.projects = [
 												...(data.homePage?.projects || []),
-												{...templateProject}
+												{ ...templateProject }
 											];
 											console.log('added project');
 										}
@@ -777,7 +777,7 @@
 										if (data.projectsPage)
 											data.projectsPage.engineeringProjects = [
 												...(data.projectsPage.engineeringProjects || []),
-												{...templateProject}
+												{ ...templateProject }
 											];
 										console.log('added project');
 									}}
@@ -1060,7 +1060,7 @@
 										if (data.projectsPage)
 											data.projectsPage.programmingProjects = [
 												...(data.projectsPage.programmingProjects || []),
-												{...templateProject}
+												{ ...templateProject }
 											];
 										console.log('added project');
 									}}
@@ -1106,10 +1106,10 @@
 									Project Overview:
 								</label>
 								<textarea
-								name="overview"
-								id=""
-								class="absolute bg-transparent resize-none left-[2.5%] top-[8%] rounded-2xl w-[95%] h-[20%]"
-								bind:value={selectedProject.description.overview}
+									name="overview"
+									id=""
+									class="absolute bg-transparent resize-none left-[2.5%] top-[8%] rounded-2xl w-[95%] h-[20%]"
+									bind:value={selectedProject.description.overview}
 								/>
 								<label for="" class="absolute left-[1%] top-[32%]">
 									Project URL:
@@ -1303,7 +1303,6 @@
 													Open Sub-Sub Headings popup
 												</button>
 											</div>
-
 											<button
 												class="absolute top-1 right-[0.125rem] hover:text-red-500"
 												on:click={() => {
@@ -1590,6 +1589,35 @@
 										</button>
 									</div>
 								{/each}
+								<button
+									class="group absolute left-[4%]"
+									on:click={() => {
+										if (selectedSubHeading.subheadings)
+											selectedSubHeading.subheadings = [
+												...(selectedSubHeading.subheadings || []),
+												{
+													title: 'Sub Heading',
+													content: '',
+													images: []
+												}
+											];
+									}}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="size-6 group-hover:rotate-45 transition-all duration-200 group-hover:stroke-sky-500"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M12 4.5v15m7.5-7.5h-15"
+										/>
+									</svg>
+								</button>
 							{/if}
 							<button
 								class="group absolute top-1 right-1"
