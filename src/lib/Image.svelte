@@ -8,5 +8,5 @@
 
 <div class="text-sm absolute {divStyle} {image.class}" style={image.css}>
     <img src={image.imgURL} alt={image.alt} class="ml-2 {imgStyle}">
-    <label for="caption" class=" {captionStlye}">{image.caption}</label>
+    {@html image.caption}
 </div>
