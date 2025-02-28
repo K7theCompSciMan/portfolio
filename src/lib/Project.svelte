@@ -15,12 +15,12 @@
 	
 >
 	<div
-		class="relative overflow-hidden text-ellipses h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col cursor-pointer group-hover:pl-[8%] transition-all duration-[400ms]"
+		class="relative overflow-hidden text-ellipses h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col cursor-pointer delay-150 group-hover:pl-[8%] transition-all duration-[400ms]"
 		on:click={() =>
 		(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 	>
 		<div
-			class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500 group-hover:text-xl flex items-center gap-[2%]"
+			class="text-2xl font-bold transition-all duration-[400ms] delay-150 group-hover:text-sky-500 group-hover:text-xl flex items-center gap-[2%]"
 		>
 			{project.name || ''}
 			{#if project.completed}
@@ -64,16 +64,16 @@
 		<div class="text-md pl-[4%] font-thin">{project.date}</div>
 	</div>
 	<div
-		class="cursor-pointer w-1/3 text-center align-middle text-ellipsis flex flex-col justify-center group-hover:text-sky-500 transition-all duration-200"
+		class="cursor-pointer w-1/3 text-center align-middle text-ellipsis flex flex-col justify-center delay-150 group-hover:text-sky-500 transition-all duration-200"
 		on:click={() =>
 		(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 	>
 		{project.description?.overview || ''}
 	</div>
 	<div
-		class="relative overflow-auto h-full w-1/3 text-right py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] transition-all duration-[400ms]"
+		class="relative overflow-auto h-full w-1/3 text-right py-[4%] pr-[4%] flex flex-col delay-150 group-hover:pr-[8%] transition-all duration-[400ms]"
 	>
-		<div class="text-2xl font-bold group-hover:text-xl transition-all duration-200">
+		<div class="text-2xl font-bold delay-150 group-hover:text-xl transition-all duration-200">
 			{project.category}
 		</div>
 		<div class="flex flex-row-reverse">

@@ -19,10 +19,10 @@
 		(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 >
 	<div
-		class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col group-hover:pl-[8%] transition-all duration-[400ms]"
+		class="relative overflow-auto h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col delay-150 group-hover:pl-[8%] transition-all duration-[400ms]"
 	>
 		<div
-			class="text-2xl font-bold transition-all duration-[400ms] group-hover:text-sky-500 flex items-center gap-[2%]"
+			class="text-2xl font-bold transition-all duration-[400ms] delay-150 group-hover:text-sky-500 flex items-center gap-[2%]"
 		>
 			{project.name}
 			{#if project.completed}
@@ -66,7 +66,7 @@
 		<div class="text-md pl-[4%] font-thin">{project.date}</div>
 	</div>
 	<div
-		class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] delay-75 transition-all duration-[400ms]"
+		class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col delay-150 group-hover:pr-[8%] delay-75 transition-all duration-[400ms]"
 	>
 		<div class="text-2xl font-bold">{project.category}</div>
 		<div class="flex flex-row-reverse">
