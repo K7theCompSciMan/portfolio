@@ -9,7 +9,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="flex border-slate-500 border-y h-1/3 group transition-all duration-200 cursor-pointer {i +
+	class="flex border-slate-500 border-y h-1/3 group transition-all delay-75 duration-200 cursor-pointer {i +
 		1 <
 	length
 		? 'mb-[2%]'
