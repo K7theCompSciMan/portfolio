@@ -7,7 +7,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="flex border-slate-500 border rounded-2xl w-[95%] relative left-[2.5%] mt-[2%] h-1/3 group hover:scale-[1.01] delay-75 transition-all duration-200  {i +
+	class="flex border-slate-500 border rounded-2xl w-[95%] relative left-[2.5%] mt-[2%] h-1/3 group hover:scale-[1.01] delay-150 transition-all duration-200  {i +
 		1 <
 	length
 		? 'mb-[2%]'
@@ -15,7 +15,7 @@
 	
 >
 	<div
-		class="relative overflow-hidden text-ellipses h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col cursor-pointer group-hover:pl-[8%] transition-all delay-75 duration-[400ms]"
+		class="relative overflow-hidden text-ellipses h-full w-1/3 text-left pl-[4%] py-[4%] flex flex-col cursor-pointer group-hover:pl-[8%] transition-all duration-[400ms]"
 		on:click={() =>
 		(window.location.pathname = `/projects/${project.name?.trim().replaceAll(' ', '-')}`)}
 	>
