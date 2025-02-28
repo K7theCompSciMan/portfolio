@@ -66,7 +66,7 @@
 		<div class="text-md pl-[4%] font-thin">{project.date}</div>
 	</div>
 	<div
-		class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] transition-all duration-[400ms]"
+		class="relative overflow-auto h-full w-1/2 text-right ml-[33%] py-[4%] pr-[4%] flex flex-col group-hover:pr-[8%] delay-75 transition-all duration-[400ms]"
 	>
 		<div class="text-2xl font-bold">{project.category}</div>
 		<div class="flex flex-row-reverse">
