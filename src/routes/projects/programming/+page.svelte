@@ -14,8 +14,9 @@
 		});
 		let data = await getData();
 		projects = data.projectsPage?.programmingProjects || [];
-		projects.sort((a, b) => (a.date! as unknown as number) - (b.date! as unknown as number));
-		projects.reverse();
+		projects = projects.sort((a, b) => (a.date! as unknown as number) - (b.date! as unknown as number));
+		projects = projects.reverse();
+		projects = projects.sort((a, b) => a.name?.localeCompare(b.name || '') || 0);
 	});
 	$: console.log(projects);
 </script>
